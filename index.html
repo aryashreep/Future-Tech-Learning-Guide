@@ -276,7 +276,7 @@ h1 .grad{background:linear-gradient(90deg,var(--c1),var(--c2),var(--c4));-webkit
 .topic-pill{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;padding:6px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--bg3);color:var(--muted);cursor:pointer;transition:all 0.18s;position:relative;user-select:none}
 .topic-pill:hover{border-color:var(--c1);color:var(--c1)}
 .topic-pill.open{border-color:var(--c1);color:var(--c1);background:rgba(96,165,250,0.06)}
-.topic-detail{display:none;position:absolute;left:0;top:calc(100% + 8px);width:360px;z-index:50;background:var(--bg1);border:1px solid var(--border2);border-radius:14px;padding:16px 18px;box-shadow:0 20px 60px rgba(0,0,0,0.6);animation:panelIn 0.18s ease}
+.topic-detail{display:none;position:fixed;z-index:9999;width:360px;background:var(--bg1);border:1px solid var(--border2);border-radius:14px;padding:16px 18px;box-shadow:0 24px 64px rgba(0,0,0,0.75),0 0 0 1px rgba(96,165,250,0.1);animation:panelIn 0.18s ease;pointer-events:auto}
 .topic-pill.open .topic-detail{display:block}
 .td-what{font-size:12px;color:#94a3b8;margin-bottom:10px;font-weight:300;line-height:1.7}
 .td-example{font-size:12px;color:#e2e8f0;line-height:1.75;background:rgba(96,165,250,0.04);border-radius:8px;padding:10px 12px;border-left:2px solid var(--c1)}
@@ -416,7 +416,7 @@ table.matrix tr:hover td:first-child{color:#fff}
   .chain-row{flex-direction:column}
   .chain-arrow{transform:rotate(90deg);align-self:center}
   .chain-node{min-width:unset}
-  .topic-detail{width:calc(100vw - 60px);left:-40px}
+  .topic-detail{width:calc(100vw - 32px);left:16px !important}
   .mode-pill{font-size:10px;padding:8px 14px}
   .first-win{padding:22px 18px}
   .fw-steps{grid-template-columns:1fr}
@@ -1488,13 +1488,36 @@ table.matrix tr:hover td:first-child{color:#fff}
   </div>
 
   <div class="detail-panel" id="cd-surg">
-    <div class="dp-head"><div class="dp-ico">🔬</div><div><div class="dp-title">Medical Surgeon</div><div class="dp-sub">One of the most respected and impactful careers in human history</div></div><button class="dp-close" onclick="closeDetail('cd-surg')">✕</button></div>
+    <div class="dp-head"><div class="dp-ico">🔬</div><div><div class="dp-title">Medical Surgeon</div><div class="dp-sub">One of the most respected and highest-impact careers in human history</div></div><button class="dp-close" onclick="closeDetail('cd-surg')">✕</button></div>
     <div class="dp-body">
-      <p>A surgeon operates on patients to treat disease, injury, and deformity. Surgery ranges from general procedures to highly specialised fields: neurosurgery, cardiothoracic surgery, robotic surgery, and microsurgery.</p>
-      <p><strong>Path:</strong> Class 12 PCM + Biology → NEET exam → MBBS (5.5 years) → MS or MCh (3 years specialisation) → Fellowship (optional, 2–3 more years). Total from Class 12: approximately 11–14 years.</p>
-      <div class="dp-wow">🩺 Modern surgeons control robotic arms that hold instruments steadier than any human hand — the same servo + sensor + feedback loop as your Arduino project, scaled to microsurgery on a beating heart. Electronics and surgery are already the same field.</div>
-      <div class="dp-note" style="background:rgba(239,68,68,0.06);color:rgba(252,165,165,0.9)">🩺 India has only 1 surgeon per 2,500 people — WHO recommends 1 per 750. The shortage is critical. A Class 8 student who becomes a surgeon in the 2030s will be entering one of the highest-need, highest-impact professions in the country.</div>
-      <div class="dp-tags"><span class="sct sct-surg">MBBS</span><span class="sct sct-surg">MS / MCh</span><span class="sct sct-surg">NEET exam</span><span class="sct sct-surg">Robotic Surgery</span></div>
+      <p>A surgeon diagnoses and treats patients through precise surgical intervention — from routine procedures like appendectomies to life-saving operations on the brain, heart, and spine. Modern surgery is no longer just a scalpel and steady hands; it is a deeply technology-driven field where AI, robotics, AR imaging, and biosensors work alongside the surgeon every single day.</p>
+
+      <p><strong>What you do daily:</strong> Review patient scans and plan surgeries on a 3D digital model before touching the patient. Perform laparoscopic (keyhole) or open operations using scalpels, electrosurgical tools, endoscopes, and increasingly — robotic arms. Work alongside anaesthesiologists, scrub nurses, and other specialists as a team. Monitor real-time vitals on biosensor displays during the operation. After surgery, track patient recovery, adjust treatment, and study latest techniques. Senior surgeons also teach residents and publish research.</p>
+
+      <p><strong>Specialisations to aim for:</strong> <strong>Neurosurgery</strong> (brain & spine — highest prestige, longest training), <strong>Cardiothoracic Surgery</strong> (heart & lungs), <strong>Orthopaedic Surgery</strong> (bones & joints), <strong>Oncology Surgery</strong> (cancer removal), <strong>Robotic Surgery</strong> (da Vinci system specialist), <strong>Paediatric Surgery</strong> (children), <strong>Plastic & Reconstructive Surgery</strong>, <strong>Transplant Surgery</strong> (organ transplants). Each sub-speciality takes 2–4 additional years beyond MS.</p>
+
+      <p><strong>Path:</strong> Class 12 PCM + Biology → <strong>NEET-UG</strong> → MBBS at AIIMS / JIPMER / GMC (5.5 years including internship) → <strong>NEET-PG</strong> → MS or MCh specialisation (3 years) → Fellowship / Superspecialisation (2–3 years optional). Total time from Class 12: <strong>11–14 years</strong> to become a fully qualified specialist. Top colleges: AIIMS New Delhi, JIPMER Puducherry, AFMC Pune, Grant Medical College Mumbai, Maulana Azad Medical College.</p>
+
+      <p><strong>Salary reality in India:</strong> Resident surgeon during training: ₹70,000–1.2 LPM stipend. Consultant surgeon in a private hospital: ₹15–40 LPA. Senior specialist / HOD at top hospital: ₹40–1.2 Cr per year. Superspecialists in private practice (neurosurgery, cardiothoracic): ₹80 L – 3 Cr+ annually. Government surgeons at AIIMS: ₹8–20 LPA with unmatched job security and research opportunities.</p>
+
+      <div class="dp-wow">🤖 The da Vinci Surgical Robot — used in hospitals globally including India — translates a surgeon's hand movements into micron-precise robotic arm motions through servo motors, force sensors, and real-time feedback loops. This is <em>exactly</em> the Arduino servo + sensor + control loop you learn now, scaled to a system that operates inside a human body. The engineer who built that robot and the surgeon who uses it are both products of the same curiosity.</div>
+
+      <div class="dp-note" style="background:rgba(239,68,68,0.07);color:rgba(252,165,165,0.9)">🇮🇳 <strong>India context:</strong> India has only 1 surgeon per 2,500 people — WHO recommends 1 per 750. Tier 2 and Tier 3 cities have almost no specialists. A Class 8 student becoming a surgeon by 2037 enters one of the most critically needed professions in the country. AIIMS expansion (6 new AIIMS opened 2020–2024) is creating more seats — competition is intense but opportunity is real.</div>
+
+      <div class="dp-note" style="background:rgba(16,185,129,0.06);color:rgba(110,231,183,0.9)">💡 <strong>The tech bridge:</strong> Surgery is increasingly inseparable from engineering. AI reads your pre-op CT scan to highlight tumour margins. Augmented Reality overlays navigation guides during brain surgery. 3D-printed implants custom-fit from patient scans. Biosensor patches monitor vitals in real time. A student who understands both medicine AND electronics (this guide!) has a rare edge — either as a surgeon who truly understands their tools, or as a medical engineer who builds the next generation of them.</div>
+
+      <div class="dp-tags">
+        <span class="sct sct-surg">MBBS</span>
+        <span class="sct sct-surg">MS / MCh</span>
+        <span class="sct sct-surg">NEET-UG / PG</span>
+        <span class="sct sct-surg">AIIMS / JIPMER</span>
+        <span class="sct sct-surg">Robotic Surgery</span>
+        <span class="sct sct-surg">Neurosurgery</span>
+        <span class="sct sct-surg">Cardiothoracic</span>
+        <span class="sct sct-med">da Vinci Robot</span>
+        <span class="sct sct-med">AI Diagnostics</span>
+        <span class="sct sct-robot">Surgical Robotics</span>
+      </div>
     </div>
   </div>
 
@@ -1571,17 +1594,60 @@ function closeDetail(id){
 }
 
 // ── TOPIC PILLS ──
+function positionTooltip(pill) {
+  const detail = pill.querySelector('.topic-detail');
+  if (!detail) return;
+  const rect    = pill.getBoundingClientRect();
+  const TW      = window.innerWidth <= 600 ? window.innerWidth - 32 : 360;
+  const margin  = 8;
+  // Vertical: prefer below the pill, flip above if not enough room
+  let top  = rect.bottom + margin;
+  if (top + 320 > window.innerHeight - margin) {
+    top = rect.top - 320 - margin;
+    if (top < margin) top = margin;
+  }
+  // Horizontal: align with pill left, but clamp inside viewport
+  let left = rect.left;
+  if (left + TW > window.innerWidth - margin) {
+    left = window.innerWidth - TW - margin;
+  }
+  if (left < margin) left = margin;
+  detail.style.top   = top  + 'px';
+  detail.style.left  = left + 'px';
+  detail.style.width = TW   + 'px';
+}
+
 function toggleTopic(el){
-  const wasOpen=el.classList.contains('open');
-  document.querySelectorAll('.topic-pill.open').forEach(x=>{if(x!==el)x.classList.remove('open')});
-  el.classList.toggle('open',!wasOpen);
-  if(!wasOpen){
-    setTimeout(()=>{
-      function outside(e){if(!el.contains(e.target)){el.classList.remove('open');document.removeEventListener('click',outside)}}
-      document.addEventListener('click',outside);
-    },10);
+  const wasOpen = el.classList.contains('open');
+  // Close any other open pills
+  document.querySelectorAll('.topic-pill.open').forEach(x => {
+    if (x !== el) x.classList.remove('open');
+  });
+  el.classList.toggle('open', !wasOpen);
+  if (!wasOpen) {
+    // Position AFTER display:block kicks in (next tick)
+    requestAnimationFrame(() => positionTooltip(el));
+    setTimeout(() => {
+      function outside(e) {
+        if (!el.contains(e.target)) {
+          el.classList.remove('open');
+          document.removeEventListener('click', outside);
+        }
+      }
+      document.addEventListener('click', outside);
+    }, 10);
   }
 }
+
+// Reposition on scroll/resize so tooltip tracks the pill
+window.addEventListener('scroll', () => {
+  const open = document.querySelector('.topic-pill.open');
+  if (open) positionTooltip(open);
+}, { passive: true });
+window.addEventListener('resize', () => {
+  const open = document.querySelector('.topic-pill.open');
+  if (open) positionTooltip(open);
+});
 
 // ── VIDEO TABS ──
 function switchTab(btn,tabId){
