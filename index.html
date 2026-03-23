@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Future Tech Careers — Class 8 Interactive Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #050508;
+  --bg1:     #080b12;
+  --bg2:     #0d1120;
+  --bg3:     #111827;
+  --border:  rgba(99,179,237,0.12);
+  --border2: rgba(99,179,237,0.25);
+  --c1: #00f5d4;   /* teal */
+  --c2: #7c3aed;   /* purple */
+  --c3: #f59e0b;   /* amber */
+  --c4: #ec4899;   /* pink */
+  --c5: #3b82f6;   /* blue */
+  --c6: #10b981;   /* green */
+  --c7: #f97316;   /* orange */
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --mono: 'JetBrains Mono', monospace;
+  --head: 'Orbitron', sans-serif;
+  --body: 'Inter', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.7;overflow-x:hidden}
+
+/* ── NEURAL GRID BG ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(0,245,212,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(124,58,237,0.05) 0%, transparent 60%),
+    linear-gradient(rgba(0,245,212,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,245,212,0.025) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,48px 48px,48px 48px;
+  pointer-events:none;
+}
+
+/* ── NEURAL NODES (decorative) ── */
+.neural-deco{position:fixed;z-index:0;pointer-events:none;opacity:0.5}
+.neural-deco span{
+  position:absolute;width:4px;height:4px;border-radius:50%;background:var(--c1);
+  animation:nodePulse 3s ease-in-out infinite;
+}
+@keyframes nodePulse{0%,100%{opacity:0.2;transform:scale(1)}50%{opacity:0.8;transform:scale(1.4)}}
+
+.page{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:64px 24px 120px}
+
+/* ── HERO ── */
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:10px;letter-spacing:0.2em;
+  color:var(--c1);text-transform:uppercase;margin-bottom:24px;
+  border:1px solid rgba(0,245,212,0.2);border-radius:20px;
+  padding:5px 14px;background:rgba(0,245,212,0.05);
+}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--c1);animation:nodePulse 2s ease-in-out infinite}
+
+h1{
+  font-family:var(--head);
+  font-size:clamp(22px,4vw,44px);
+  font-weight:900;line-height:1.15;
+  color:#fff;margin-bottom:10px;
+  letter-spacing:0.02em;
+}
+h1 .grad{
+  background:linear-gradient(90deg,var(--c1),var(--c2),var(--c4));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{font-size:15px;font-weight:300;color:var(--muted);max-width:580px;line-height:1.9;margin-bottom:48px}
+
+/* ── SECTION LABEL ── */
+.sec-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:0.22em;
+  color:var(--c1);text-transform:uppercase;
+  display:flex;align-items:center;gap:12px;margin-bottom:28px;
+}
+.sec-label::before{content:'//';color:var(--c2)}
+.sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--border2),transparent)}
+
+/* ── CAREER SELECTOR ── */
+.career-selector{margin-bottom:56px}
+.career-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.career-pill{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.08em;
+  padding:8px 18px;border-radius:20px;
+  border:1px solid var(--border2);background:var(--bg2);
+  color:var(--muted);cursor:pointer;transition:all 0.2s;
+}
+.career-pill:hover{border-color:var(--c1);color:var(--c1)}
+.career-pill.active{color:#000;font-weight:600;border-color:transparent}
+
+/* ── AI CARDS ── */
+.ai-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:24px;
+  position:relative;
+  overflow:hidden;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.ai-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--card-accent,var(--c1)),transparent);
+}
+.ai-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+
+/* ── SIGNAL CHAIN ── */
+.chain-section{margin-bottom:60px}
+.chain-row{display:flex;align-items:center;gap:0;overflow-x:auto;padding-bottom:6px}
+.chain-node{
+  flex:1;min-width:130px;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:14px;padding:20px 14px;text-align:center;
+  cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;
+}
+.chain-node::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 0%, var(--node-color,var(--c1)) 0%, transparent 70%);
+  opacity:0;transition:opacity 0.3s;
+}
+.chain-node:hover::before,.chain-node.active::before{opacity:0.08}
+.chain-node:hover,.chain-node.active{border-color:var(--node-color,var(--c1));transform:translateY(-4px)}
+.chain-node .cn-num{font-family:var(--mono);font-size:9px;letter-spacing:0.15em;color:var(--muted);margin-bottom:10px}
+.chain-node .cn-ico{font-size:24px;margin-bottom:10px}
+.chain-node .cn-name{font-size:12px;font-weight:600;color:#fff;margin-bottom:3px;font-family:var(--head);letter-spacing:0.04em}
+.chain-node .cn-sub{font-size:11px;color:var(--muted);line-height:1.5}
+.chain-node .cn-hint{margin-top:8px;font-family:var(--mono);font-size:9px;color:var(--node-color,var(--c1));opacity:0.6;animation:nodePulse 2s ease-in-out infinite}
+.chain-arrow{flex-shrink:0;padding:0 6px;color:var(--c1);font-size:16px;opacity:0.5;margin-top:-12px;padding-top:44px}
+
+/* chain node colors */
+.cn-blue   {--node-color:var(--c5)}
+.cn-teal   {--node-color:var(--c1)}
+.cn-amber  {--node-color:var(--c3)}
+.cn-purple {--node-color:var(--c2)}
+.cn-green  {--node-color:var(--c6)}
+.cn-pink   {--node-color:var(--c4)}
+.cn-orange {--node-color:var(--c7)}
+
+/* ── DETAIL PANEL ── */
+.detail-panel{
+  margin-top:16px;border-radius:16px;
+  border:1px solid var(--border);background:var(--bg1);
+  overflow:hidden;display:none;animation:panelIn 0.22s ease;
+}
+.detail-panel.open{display:block}
+@keyframes panelIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.dp-head{
+  padding:18px 22px;border-bottom:1px solid var(--border);
+  background:var(--bg2);display:flex;align-items:center;gap:14px;
+}
+.dp-ico{font-size:26px}
+.dp-title{font-family:var(--head);font-size:13px;font-weight:700;color:#fff;letter-spacing:0.04em}
+.dp-sub{font-size:11px;color:var(--muted);margin-top:2px;font-family:var(--mono)}
+.dp-close{margin-left:auto;background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;transition:color 0.15s;line-height:1}
+.dp-close:hover{color:#fff}
+.dp-body{padding:22px}
+.dp-body p{font-size:13px;color:#94a3b8;font-weight:300;line-height:1.85;margin-bottom:12px}
+.dp-body p:last-child{margin-bottom:0}
+.dp-body p strong{color:#fff;font-weight:500}
+.dp-note{border-radius:10px;padding:14px 18px;margin-top:14px;font-size:12px;line-height:1.7}
+.dp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.dp-tag{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:10px;border:1px solid var(--border2);color:var(--muted)}
+
+/* ── CAREER OVERVIEW GRID ── */
+.careers-section{margin-bottom:60px}
+.careers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.career-card{
+  --cc:var(--c1);
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:16px;padding:22px;cursor:pointer;
+  transition:all 0.2s;position:relative;overflow:hidden;
+}
+.career-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--cc);opacity:0.6;transition:opacity 0.2s;
+}
+.career-card:hover{border-color:var(--cc);transform:translateY(-4px)}
+.career-card:hover::after{opacity:1}
+.cc-icon{font-size:28px;margin-bottom:14px}
+.cc-name{font-family:var(--head);font-size:13px;font-weight:700;color:#fff;letter-spacing:0.04em;margin-bottom:6px}
+.cc-desc{font-size:12px;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:14px}
+.cc-tags{display:flex;flex-wrap:wrap;gap:5px}
+.cc-tag{font-family:var(--mono);font-size:9px;padding:2px 8px;border-radius:10px}
+
+/* career card colors */
+.cc-isro   {--cc:var(--c5)}
+.cc-vlsi   {--cc:var(--c1)}
+.cc-robot  {--cc:var(--c2)}
+.cc-sat    {--cc:var(--c3)}
+.cc-data   {--cc:var(--c4)}
+.cc-med    {--cc:var(--c6)}
+.cc-surg   {--cc:#ef4444}
+.cc-surg:hover{border-color:#ef4444}
+.cc-surg::after{background:#ef4444}
+
+/* ── ACADEMIC PATH ── */
+.academic-section{margin-bottom:60px}
+.acad-intro{font-size:14px;color:#64748b;font-weight:300;line-height:1.9;margin-bottom:32px;max-width:680px}
+
+.acad-stage{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:18px;overflow:hidden;margin-bottom:20px;
+}
+.acad-stage-head{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 22px;border-bottom:1px solid var(--border);
+  background:var(--bg3);
+}
+.stage-badge{
+  font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:0.1em;padding:4px 12px;border-radius:20px;flex-shrink:0;
+}
+.badge-now {background:rgba(0,245,212,0.1);color:var(--c1)}
+.badge-next{background:rgba(59,130,246,0.1);color:var(--c5)}
+.badge-grad{background:rgba(124,58,237,0.1);color:var(--c2)}
+.stage-title{font-size:13px;font-weight:500;color:#fff;font-family:var(--head);letter-spacing:0.04em}
+
+.acad-subject{padding:18px 22px;border-bottom:1px solid var(--border)}
+.acad-subject:last-child{border-bottom:none}
+.subj-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.subj-icon{font-size:16px}
+.subj-name{font-size:13px;font-weight:600;color:#fff;flex:1;font-family:var(--head);letter-spacing:0.03em}
+.subj-imp{
+  font-family:var(--mono);font-size:9px;padding:2px 8px;border-radius:10px;letter-spacing:0.06em;
+}
+.s-math    .subj-imp{background:rgba(0,245,212,0.1);color:var(--c1)}
+.s-physics .subj-imp{background:rgba(245,158,11,0.1);color:var(--c3)}
+.s-cs      .subj-imp{background:rgba(59,130,246,0.1);color:var(--c5)}
+.s-chem    .subj-imp{background:rgba(236,72,153,0.1);color:var(--c4)}
+.s-bio     .subj-imp{background:rgba(16,185,129,0.1);color:var(--c6)}
+.s-stat    .subj-imp{background:rgba(236,72,153,0.1);color:var(--c4)}
+.s-extra   .subj-imp{background:rgba(124,58,237,0.1);color:var(--c2)}
+.s-path    .subj-imp{background:rgba(249,115,22,0.1);color:var(--c7)}
+
+.subj-hint{font-size:11px;color:var(--muted);margin-bottom:12px;font-family:var(--mono)}
+
+/* topic pills */
+.topic-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.topic-pill{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.04em;
+  padding:6px 14px;border-radius:20px;
+  border:1px solid var(--border2);background:var(--bg3);
+  color:var(--muted);cursor:pointer;transition:all 0.18s;
+  position:relative;user-select:none;
+}
+.topic-pill:hover{border-color:var(--c1);color:var(--c1)}
+.topic-pill.open{border-color:var(--c1);color:var(--c1);background:rgba(0,245,212,0.06)}
+.topic-detail{
+  display:none;position:absolute;left:0;top:calc(100% + 8px);
+  width:360px;z-index:50;
+  background:var(--bg1);border:1px solid var(--border2);
+  border-radius:14px;padding:16px 18px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  animation:panelIn 0.18s ease;
+}
+.topic-pill.open .topic-detail{display:block}
+.td-what{font-size:12px;color:#94a3b8;margin-bottom:10px;font-weight:300;line-height:1.7}
+.td-example{
+  font-size:12px;color:#e2e8f0;line-height:1.75;
+  background:rgba(0,245,212,0.04);border-radius:8px;
+  padding:10px 12px;border-left:2px solid var(--c1);
+}
+.td-label{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;color:var(--c1);display:block;margin-bottom:4px}
+.td-example code{font-family:var(--mono);font-size:11px;color:var(--c3);background:rgba(245,158,11,0.1);padding:1px 5px;border-radius:4px}
+.td-career{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.subj-career-tags{display:flex;flex-wrap:wrap;gap:6px}
+
+/* career tags */
+.sct{font-family:var(--mono);font-size:9px;padding:2px 8px;border-radius:10px;letter-spacing:0.06em}
+.sct-isro {background:rgba(59,130,246,0.12);color:var(--c5)}
+.sct-vlsi {background:rgba(0,245,212,0.12);color:var(--c1)}
+.sct-robot{background:rgba(124,58,237,0.12);color:var(--c2)}
+.sct-sat  {background:rgba(245,158,11,0.12);color:var(--c3)}
+.sct-data {background:rgba(236,72,153,0.12);color:var(--c4)}
+.sct-surg {background:rgba(239,68,68,0.12);color:#f87171}
+
+/* ── MATRIX TABLE ── */
+.matrix-wrap{overflow-x:auto;margin-top:24px}
+.matrix-label{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;margin-bottom:12px}
+table.matrix{width:100%;border-collapse:collapse;font-size:12px}
+table.matrix th{
+  font-family:var(--mono);font-size:10px;font-weight:400;
+  padding:10px 12px;text-align:center;color:var(--muted);
+  background:var(--bg3);border-bottom:1px solid var(--border);
+}
+table.matrix th:first-child{text-align:left}
+table.matrix td{
+  padding:9px 12px;text-align:center;
+  border-bottom:1px solid var(--border);color:var(--text);font-size:11px;
+}
+table.matrix td:first-child{text-align:left;color:#94a3b8;font-size:12px}
+table.matrix tr:hover td{background:var(--bg2)}
+table.matrix tr:hover td:first-child{color:#fff}
+.matrix-legend{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:8px}
+
+/* ── VIDEO SECTION ── */
+.video-section{margin-bottom:60px}
+.vtabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.vtab{
+  font-family:var(--mono);font-size:10px;letter-spacing:0.08em;
+  padding:7px 16px;border-radius:20px;
+  border:1px solid var(--border);background:transparent;
+  color:var(--muted);cursor:pointer;transition:all 0.18s;
+}
+.vtab:hover{border-color:var(--c1);color:var(--c1)}
+.vtab.active{background:var(--c1);border-color:var(--c1);color:#000;font-weight:700}
+.vtab-content{display:none}
+.vtab-content.active{display:block;animation:panelIn 0.22s ease}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.video-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;text-decoration:none;
+  display:flex;flex-direction:column;transition:all 0.18s;
+}
+.video-card:hover{transform:translateY(-3px);border-color:var(--border2)}
+.vthumb{
+  height:100px;display:flex;align-items:center;justify-content:center;position:relative;
+}
+.vplay{
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:#fff;transition:background 0.18s;padding-left:3px;
+}
+.video-card:hover .vplay{background:rgba(0,245,212,0.7);color:#000}
+.vdur{
+  position:absolute;bottom:7px;right:9px;
+  font-family:var(--mono);font-size:9px;
+  background:rgba(0,0,0,0.7);color:#fff;padding:2px 6px;border-radius:4px;
+}
+.vinfo{padding:12px 14px;flex:1}
+.vtitle{font-size:12px;font-weight:600;color:#fff;margin-bottom:2px;line-height:1.4;font-family:var(--head);letter-spacing:0.02em}
+.vchannel{font-family:var(--mono);font-size:9px;color:var(--c1);margin-bottom:6px;letter-spacing:0.06em}
+.vdesc{font-size:11px;color:var(--muted);font-weight:300;line-height:1.6}
+
+/* ── REFERENCES ── */
+.ref-section{margin-bottom:60px}
+.ref-cats{display:flex;flex-direction:column;gap:24px}
+.cat-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:0.16em;
+  color:var(--muted);text-transform:uppercase;margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+.cat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(256px,1fr));gap:10px}
+.ref-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:12px;padding:14px 16px;
+  text-decoration:none;display:flex;align-items:flex-start;gap:12px;
+  transition:all 0.18s;
+}
+.ref-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.ref-ico{font-size:18px;flex-shrink:0;margin-top:1px}
+.ref-info{flex:1;min-width:0}
+.ref-name{font-size:12px;font-weight:600;color:#fff;margin-bottom:2px;font-family:var(--head);letter-spacing:0.02em}
+.ref-desc{font-size:11px;color:var(--muted);font-weight:300;line-height:1.5}
+.ref-url{font-family:var(--mono);font-size:9px;color:var(--c1);margin-top:5px;opacity:0.6;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ref-badge{
+  font-family:var(--mono);font-size:9px;padding:2px 7px;
+  border-radius:10px;flex-shrink:0;align-self:flex-start;margin-top:2px;
+}
+.cat-learn .ref-card:hover{border-color:rgba(0,245,212,0.3)} .cat-learn .ref-badge{background:rgba(0,245,212,0.1);color:var(--c1)}
+.cat-buy   .ref-card:hover{border-color:rgba(245,158,11,0.3)} .cat-buy   .ref-badge{background:rgba(245,158,11,0.1);color:var(--c3)}
+.cat-watch .ref-card:hover{border-color:rgba(236,72,153,0.3)} .cat-watch .ref-badge{background:rgba(236,72,153,0.1);color:var(--c4)}
+.cat-comp  .ref-card:hover{border-color:rgba(124,58,237,0.3)} .cat-comp  .ref-badge{background:rgba(124,58,237,0.1);color:var(--c2)}
+.cat-india .ref-card:hover{border-color:rgba(59,130,246,0.3)}  .cat-india .ref-badge{background:rgba(59,130,246,0.1);color:var(--c5)}
+.cat-data  .ref-card:hover{border-color:rgba(236,72,153,0.3)}  .cat-data  .ref-badge{background:rgba(236,72,153,0.1);color:var(--c4)}
+.cat-med   .ref-card:hover{border-color:rgba(16,185,129,0.3)}  .cat-med   .ref-badge{background:rgba(16,185,129,0.1);color:var(--c6)}
+
+/* ── PROGRESS STEPS ── */
+.prog-steps{display:flex;flex-direction:column;gap:0;margin-bottom:56px}
+.prog-step{display:flex;gap:20px;align-items:flex-start;padding-bottom:28px;position:relative}
+.prog-step::before{content:'';position:absolute;left:17px;top:38px;bottom:0;width:1px;background:var(--border)}
+.prog-step:last-child::before{display:none}
+.prog-dot{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:10px;font-weight:700;
+  flex-shrink:0;z-index:1;
+}
+.pd1{background:rgba(0,245,212,0.1);color:var(--c1);border:1px solid rgba(0,245,212,0.3)}
+.pd2{background:rgba(59,130,246,0.1);color:var(--c5);border:1px solid rgba(59,130,246,0.3)}
+.pd3{background:rgba(124,58,237,0.1);color:var(--c2);border:1px solid rgba(124,58,237,0.3)}
+.prog-content{padding-top:5px}
+.prog-content strong{display:block;font-size:13px;font-weight:600;color:#fff;margin-bottom:4px;font-family:var(--head);letter-spacing:0.02em}
+.prog-content span{font-size:12px;color:var(--muted);font-weight:300;line-height:1.7}
+
+/* ── COST BANNER ── */
+.cost-banner{
+  background:var(--bg2);border:1px solid rgba(0,245,212,0.15);
+  border-left:3px solid var(--c1);border-radius:14px;
+  padding:22px 26px;display:flex;align-items:flex-start;gap:18px;margin-bottom:56px;
+}
+.cost-ico{font-size:26px;flex-shrink:0}
+.cost-text{font-size:13px;color:#64748b;font-weight:300;line-height:1.85}
+.cost-text strong{color:var(--c1);font-weight:500}
+
+/* ── 3-GRID ── */
+.three-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.proj-stack{display:flex;flex-direction:column;gap:12px}
+.proj-row{
+  background:var(--bg2);border:1px solid var(--border);border-radius:14px;
+  padding:18px 20px;cursor:pointer;transition:all 0.2s;
+  display:flex;align-items:center;gap:16px;
+}
+.proj-row:hover{border-color:var(--border2);transform:translateY(-2px)}
+
+/* ── FOOTER NOTE ── */
+.ref-footnote{font-family:var(--mono);font-size:10px;color:var(--muted);text-align:center;margin-top:18px;letter-spacing:0.04em}
+
+/* ── WHY CARDS ── */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-bottom:56px}
+.why-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:14px;padding:20px;
+}
+.wc-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;color:var(--c1);margin-bottom:8px;text-transform:uppercase}
+.why-card p{font-size:12px;color:#64748b;font-weight:300;line-height:1.75}
+.why-card p strong{color:#fff;font-weight:500}
+
+@media(max-width:600px){
+  .chain-row{flex-direction:column}
+  .chain-arrow{transform:rotate(90deg);align-self:center}
+  .chain-node{min-width:unset}
+  .topic-detail{width:calc(100vw - 60px);left:-40px}
+}
+</style>
+</head>
+<body>
+
+<!-- neural decorations -->
+<div class="neural-deco">
+  <span style="top:8%;left:12%;animation-delay:0s"></span>
+  <span style="top:15%;left:85%;animation-delay:0.5s"></span>
+  <span style="top:45%;left:5%;animation-delay:1s"></span>
+  <span style="top:70%;left:92%;animation-delay:1.5s"></span>
+  <span style="top:85%;left:20%;animation-delay:0.8s"></span>
+  <span style="top:30%;left:60%;animation-delay:1.2s"></span>
+</div>
+
+<div class="page">
+
+<!-- ══ HERO ══ -->
+<div class="hero-tag">Class 8 · Future Tech · Physical Computing</div>
+<h1>Your idea → code →<br><span class="grad">signal → real world moves</span></h1>
+<p class="hero-sub">The most exciting moment in electronics — when a student first makes a real-world device respond to code. Seven career paths. Every subject explained with real engineering examples. Click anything to explore.</p>
+
+<!-- ══ CAREER OVERVIEW ══ -->
+<div class="careers-section">
+  <div class="sec-label">Seven future-tech careers you can aim for</div>
+  <div class="careers-grid">
+
+    <div class="career-card cc-isro" onclick="openDetail('cd-isro')">
+      <div class="cc-icon">🚀</div>
+      <div class="cc-name">Space Research Scientist</div>
+      <div class="cc-desc">Rockets, satellites, planetary missions, orbital mechanics, and space exploration for India.</div>
+      <div class="cc-tags">
+        <span class="cc-tag" style="background:rgba(59,130,246,0.1);color:var(--c5)">Aerospace</span>
+        <span class="cc-tag" style="background:rgba(59,130,246,0.1);color:var(--c5)">Govt</span>
+        <span class="cc-tag" style="background:rgba(59,130,246,0.1);color:var(--c5)">₹8–25 LPA</span>
+      </div>
+    </div>
+
+    <div class="career-card cc-vlsi" onclick="openDetail('cd-vlsi')">
+      <div class="cc-icon">⚡</div>
+      <div class="cc-name">VLSI Engineer</div>
+      <div class="cc-desc">Design microchips — the brain of every phone, car, satellite, and AI system on Earth.</div>
+      <div class="cc-tags">
+        <span class="cc-tag" style="background:rgba(0,245,212,0.1);color:var(--c1)">ECE / EE</span>
+        <span class="cc-tag" style="background:rgba(0,245,212,0.1);color:var(--c1)">Highest Paid</span>
+        <span class="cc-tag" style="background:rgba(0,245,212,0.1);color:var(--c1)">₹12–60 LPA</span>
+      </div>
+    </div>
+
+    <div class="career-card cc-robot" onclick="openDetail('cd-robot')">
+      <div class="cc-icon">🤖</div>
+      <div class="cc-name">Robotics Engineer</div>
+      <div class="cc-desc">Build robots for factories, surgery, defence, space and agriculture. The hottest career of the 2030s.</div>
+      <div class="cc-tags">
+        <span class="cc-tag" style="background:rgba(124,58,237,0.1);color:var(--c2)">Mech / CS / ECE</span>
+        <span class="cc-tag" style="background:rgba(124,58,237,0.1);color:var(--c2)">₹10–50 LPA</span>
+      </div>
+    </div>
+
+    <div class="career-card cc-sat" onclick="openDetail('cd-sat')">
+      <div class="cc-icon">🛰️</div>
+      <div class="cc-name">Satellite Engineer</div>
+      <div class="cc-desc">Design and operate satellites for GPS, internet, weather, climate monitoring and defence.</div>
+      <div class="cc-tags">
+        <span class="cc-tag" style="background:rgba(245,158,11,0.1);color:var(--c3)">Telecom</span>
+        <span class="cc-tag" style="background:rgba(245,158,11,0.1);color:var(--c3)">Private Space</span>
+        <span class="cc-tag" style="background:rgba(245,158,11,0.1);color:var(--c3)">₹8–40 LPA</span>
+      </div>
+    </div>
+
+    <div class="career-card cc-data" onclick="openDetail('cd-data')">
+      <div class="cc-icon">📊</div>
+      <div class="cc-name">Data Scientist</div>
+      <div class="cc-desc">Find patterns in massive datasets using Python, statistics & ML. Every company needs data scientists.</div>
+      <div class="cc-tags">
+        <span class="cc-tag" style="background:rgba(236,72,153,0.1);color:var(--c4)">AI / ML</span>
+        <span class="cc-tag" style="background:rgba(236,72,153,0.1);color:var(--c4)">Everywhere</span>
+        <span class="cc-tag" style="background:rgba(236,72,153,0.1);color:var(--c4)">₹10–50 LPA</span>
+      </div>
+    </div>
+
+    <div class="career-card cc-med" onclick="openDetail('cd-med')">
+      <div class="cc-icon">🏥</div>
+      <div class="cc-name">Medical Tech Engineer</div>
+      <div class="cc-desc">Build devices that save lives — MRI, AI diagnostics, surgical robots, wearable health sensors.</div>
+      <div class="cc-tags">
+        <span class="cc-tag" style="background:rgba(16,185,129,0.1);color:var(--c6)">Biomedical</span>
+        <span class="cc-tag" style="background:rgba(16,185,129,0.1);color:var(--c6)">Healthcare</span>
+        <span class="cc-tag" style="background:rgba(16,185,129,0.1);color:var(--c6)">₹8–35 LPA</span>
+      </div>
+    </div>
+
+    <div class="career-card cc-surg" onclick="openDetail('cd-surg')">
+      <div class="cc-icon">🔬</div>
+      <div class="cc-name">Medical Surgeon</div>
+      <div class="cc-desc">Diagnose and treat patients through surgery — one of the most respected, high-impact careers in human history.</div>
+      <div class="cc-tags">
+        <span class="cc-tag" style="background:rgba(239,68,68,0.1);color:#f87171">MBBS + MS</span>
+        <span class="cc-tag" style="background:rgba(239,68,68,0.1);color:#f87171">Prestige</span>
+        <span class="cc-tag" style="background:rgba(239,68,68,0.1);color:#f87171">₹15–80 LPA</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Career detail panels -->
+  <div class="detail-panel" id="cd-isro">
+    <div class="dp-head"><div class="dp-ico">🚀</div><div><div class="dp-title">Space Research Scientist / Engineer</div><div class="dp-sub">Entry: ICRB exam after B.Tech · or IIST direct path</div></div><button class="dp-close" onclick="closeDetail('cd-isro')">✕</button></div>
+    <div class="dp-body">
+      <p>ISRO (Indian Space Research Organisation) is India's space agency. As an ISRO scientist you could work on rocket propulsion, satellite design, navigation systems (NavIC), or planetary missions like Chandrayaan and Aditya-L1.</p>
+      <p><strong>What you do daily:</strong> Run simulations of orbital trajectories, design payload electronics, test thermal systems on satellites, write control software for launch vehicles, or analyse data from space sensors.</p>
+      <p><strong>Path:</strong> Class 12 PCM → B.Tech in Aerospace / Mechanical / ECE at IIT or NIT → ICRB exam (ISRO's own recruitment). Or take IIST entrance — ISRO's own university, guaranteed placement inside ISRO.</p>
+      <div class="dp-note" style="background:rgba(59,130,246,0.06);color:rgba(147,197,253,0.9)">🌟 ISRO YUVIKA: Class 9 students can visit ISRO centres through this programme — apply at isro.gov.in/YUVIKA. Start preparing now (Class 8) so you qualify next year.</div>
+      <div class="dp-tags"><span class="sct sct-isro">Aerospace Engg</span><span class="sct sct-isro">Orbital Mechanics</span><span class="sct sct-isro">ICRB exam</span><span class="sct sct-isro">IIST</span></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="cd-vlsi">
+    <div class="dp-head"><div class="dp-ico">⚡</div><div><div class="dp-title">VLSI / Chip Design Engineer</div><div class="dp-sub">Hottest engineering career in India right now</div></div><button class="dp-close" onclick="closeDetail('cd-vlsi')">✕</button></div>
+    <div class="dp-body">
+      <p>VLSI (Very Large Scale Integration) engineers design microchips — the tiny silicon devices inside every phone, laptop, car, satellite, and AI server. India is building its own semiconductor industry and needs thousands of VLSI engineers urgently.</p>
+      <p><strong>What you do daily:</strong> Write Verilog/VHDL code that describes chip behaviour, run timing simulations, design logic circuits, use Cadence and Synopsys tools to place millions of transistors on a layout, and verify that the chip works before sending to the fab.</p>
+      <p><strong>Path:</strong> Class 12 PCM → B.Tech in ECE or EE → Learn Verilog/VHDL → M.Tech VLSI (optional but helps) → Qualcomm, Intel, NVIDIA, Tata Semiconductor.</p>
+      <div class="dp-note" style="background:rgba(0,245,212,0.06);color:rgba(94,234,212,0.9)">🇮🇳 India's ₹76,000 crore semiconductor mission is creating 100,000+ new VLSI jobs. There are only ~10,000 VLSI engineers in India today. Supply is tiny vs demand — best time ever to enter this field.</div>
+      <div class="dp-tags"><span class="sct sct-vlsi">ECE / EE Branch</span><span class="sct sct-vlsi">Verilog / VHDL</span><span class="sct sct-vlsi">Cadence</span><span class="sct sct-vlsi">Synopsys</span></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="cd-robot">
+    <div class="dp-head"><div class="dp-ico">🤖</div><div><div class="dp-title">Robotics Engineer</div><div class="dp-sub">The career of the 2030s</div></div><button class="dp-close" onclick="closeDetail('cd-robot')">✕</button></div>
+    <div class="dp-body">
+      <p>Robotics engineers design machines that sense the world, make decisions, and take physical actions. Applications: industrial automation, surgical robots, agricultural drones, ISRO rovers, warehouse robots, defence systems.</p>
+      <p><strong>What you do daily:</strong> Write ROS (Robot Operating System) code, design mechanical joints, program computer vision systems using OpenCV, tune PID control loops so robots move smoothly, test sensors in real environments.</p>
+      <p><strong>Path:</strong> Multiple entry routes — Mechanical Engineering (for robot bodies), Computer Science + AI (for robot brains), or ECE (for robot senses). Arduino projects now → Raspberry Pi + sensors → ROS in college.</p>
+      <div class="dp-note" style="background:rgba(124,58,237,0.06);color:rgba(196,181,253,0.9)">🏭 Every large Indian factory (Tata, Mahindra, Maruti) is automating with robots. Healthcare robots for surgery are growing 15% per year. Agriculture drones are a massive emerging field in India specifically.</div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="cd-sat">
+    <div class="dp-head"><div class="dp-ico">🛰️</div><div><div class="dp-title">Satellite Engineer</div><div class="dp-sub">India's private space sector is exploding</div></div><button class="dp-close" onclick="closeDetail('cd-sat')">✕</button></div>
+    <div class="dp-body">
+      <p>Satellite engineers design, build and operate satellites. Work ranges from the electronics inside the satellite (power, communication, sensors) to the ground systems that track and control them from Earth.</p>
+      <p><strong>What you do daily:</strong> Design antenna systems, write satellite telemetry processing code, calculate orbital parameters, test communication links, monitor satellite health data streams in real time.</p>
+      <p><strong>Path:</strong> B.Tech in ECE or Aerospace → specialise in satellite communications or remote sensing → ISRO/SAC, or private companies like Agnikul, Skyroot, Pixxel, OneWeb.</p>
+      <div class="dp-note" style="background:rgba(245,158,11,0.06);color:rgba(253,230,138,0.9)">🛸 India's 2024 space policy opened private satellite companies. 500+ Indian space startups now exist. This field is growing 10× faster than it was 5 years ago. Early entrants have massive advantage.</div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="cd-data">
+    <div class="dp-head"><div class="dp-ico">📊</div><div><div class="dp-title">Data Scientist / AI Engineer</div><div class="dp-sub">The #1 most demanded career globally 2025–2035</div></div><button class="dp-close" onclick="closeDetail('cd-data')">✕</button></div>
+    <div class="dp-body">
+      <p>Data scientists find meaning in massive datasets using statistics, machine learning, and programming. They build models that predict, classify, and make decisions — powering everything from Google Search to hospital diagnostics to ISRO satellite imagery analysis.</p>
+      <p><strong>What you do daily:</strong> Clean and analyse data with Python (Pandas, NumPy), build ML models (scikit-learn, TensorFlow, PyTorch), create visualisations, write SQL queries, deploy models to production, and present insights to decision-makers.</p>
+      <p><strong>Path:</strong> Strong Maths (especially statistics + linear algebra) → Learn Python now → B.Tech in CS or Maths + CS → take Kaggle challenges, build projects → Join any tech company, hospital, bank, government, or startup — all need data scientists.</p>
+      <div class="dp-note" style="background:rgba(236,72,153,0.06);color:rgba(249,168,212,0.9)">📈 Data science overlaps with ALL six careers: ISRO uses it for satellite imagery, VLSI uses it for chip yield analysis, Medical uses it for disease prediction, Robotics uses it for computer vision. Learning data science makes you stronger in every other path.</div>
+      <div class="dp-tags"><span class="sct sct-data">Python</span><span class="sct sct-data">Statistics</span><span class="sct sct-data">Machine Learning</span><span class="sct sct-data">SQL</span><span class="sct sct-data">TensorFlow</span></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="cd-med">
+    <div class="dp-head"><div class="dp-ico">🏥</div><div><div class="dp-title">Medical Technology Engineer</div><div class="dp-sub">Where electronics meets saving lives</div></div><button class="dp-close" onclick="closeDetail('cd-med')">✕</button></div>
+    <div class="dp-body">
+      <p>Medical tech engineers build the devices and systems that doctors use — MRI machines, ultrasound scanners, AI diagnostic tools, surgical robots, wearable health monitors, prosthetic limbs, implantable sensors, and hospital information systems.</p>
+      <p><strong>What you do daily:</strong> Design biosensors that measure heartbeat or blood oxygen, write firmware for medical devices, build AI models that detect cancer in medical images, develop wearables that track patient health continuously, work with doctors to turn medical needs into engineering solutions.</p>
+      <p><strong>Path:</strong> Class 12 PCM (Physics + Maths + Chemistry or Biology) → B.Tech in Biomedical Engineering or ECE + Biology minor → Work at Philips, GE Healthcare, Siemens Healthineers, or Indian medtech startups. Also: MBBS + Engineering is a powerful combination.</p>
+      <div class="dp-note" style="background:rgba(16,185,129,0.06);color:rgba(110,231,183,0.9)">❤️ India has 1.4 billion people and severe shortage of doctors. Technology — AI diagnostics, telemedicine, low-cost devices — is the only way to scale healthcare. Medical tech engineers are among the most impactful engineers in the world.</div>
+      <div class="dp-tags"><span class="sct sct-med">Biomedical Engg</span><span class="sct sct-med">ECE + Biology</span><span class="sct sct-med">AI Diagnostics</span><span class="sct sct-med">Biosensors</span></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="cd-surg">
+    <div class="dp-head"><div class="dp-ico">🔬</div><div><div class="dp-title">Medical Surgeon</div><div class="dp-sub">One of the most respected and impactful careers in human history</div></div><button class="dp-close" onclick="closeDetail('cd-surg')">✕</button></div>
+    <div class="dp-body">
+      <p>A surgeon operates on patients to treat disease, injury, and deformity. Surgery ranges from general procedures (appendix removal, hernia repair) to highly specialised fields: neurosurgery (brain and spine), cardiothoracic surgery (heart and lungs), orthopaedic surgery (bones and joints), robotic surgery, and microsurgery on tiny structures under a microscope.</p>
+      <p><strong>What you do daily:</strong> Diagnose patients, plan surgeries, perform operations using scalpels, laparoscopes, and robotic instruments, monitor patients during recovery, collaborate with anaesthesiologists, nurses, and other specialists, and constantly study the latest techniques. Senior surgeons also teach and research new methods.</p>
+      <p><strong>Where technology meets surgery:</strong> Modern surgeons use robotic systems (like the da Vinci robot), AI-assisted imaging to plan operations on a screen before touching the patient, 3D-printed bone implants custom-made from a patient's CT scan, augmented reality overlays during laparoscopic surgery, and biosensors that monitor patient vitals in real time during the operation. This is where this entire guide connects to surgery — the technology behind all of these is built by Medical Tech Engineers, VLSI designers, Robotics engineers, and Data Scientists.</p>
+      <p><strong>Path:</strong> Class 12 PCM + Biology (both Physics and Biology in Class 12) → NEET exam → MBBS (5.5 years including internship) → MS or MCh (Master of Surgery, 3 years specialisation) → Fellowship or Superspecialisation (optional, 2–3 more years). Total from Class 12: approximately 11–14 years to become a fully qualified specialist surgeon.</p>
+      <p><strong>Specialisations to consider:</strong> Neurosurgery, Cardiothoracic Surgery, Orthopaedic Surgery, Plastic & Reconstructive Surgery, Oncology Surgery, Robotic Surgery, Paediatric Surgery, Transplant Surgery.</p>
+      <div class="dp-note" style="background:rgba(239,68,68,0.06);color:rgba(252,165,165,0.9)">🩺 India has only 1 surgeon per 2,500 people — WHO recommends 1 per 750. The shortage is critical. A Class 8 student who becomes a surgeon in the 2030s will be entering one of the highest-need, highest-impact professions in the country. The journey is long but deeply rewarding.</div>
+      <div class="dp-note" style="background:rgba(16,185,129,0.06);color:rgba(110,231,183,0.9)">🤖 Robotic Surgery connection: The Da Vinci Surgical System — a robot that surgeons control with precision handles to perform minimally invasive procedures — is built on exactly the same Arduino servo + sensor principles discussed in this guide. Learning electronics and robotics NOW makes you a better surgeon LATER, because you'll understand the tools you use.</div>
+      <div class="dp-tags">
+        <span class="sct sct-surg">MBBS</span>
+        <span class="sct sct-surg">MS / MCh</span>
+        <span class="sct sct-surg">NEET exam</span>
+        <span class="sct sct-surg">Robotic Surgery</span>
+        <span class="sct sct-surg">Neurosurgery</span>
+        <span class="sct sct-surg">Cardiothoracic</span>
+        <span class="sct sct-med">Medical Imaging</span>
+        <span class="sct sct-robot">Robotics</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ SIGNAL CHAIN ══ -->
+<div class="chain-section">
+  <div class="sec-label">The signal chain — tap any box</div>
+  <div class="chain-row">
+    <div class="chain-node cn-blue" onclick="openDetail('d-code')">
+      <div class="cn-num">01</div><div class="cn-ico">💻</div>
+      <div class="cn-name">Your Code</div><div class="cn-sub">Arduino IDE on laptop</div>
+      <div class="cn-hint">▼ tap</div>
+    </div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-node cn-teal" onclick="openDetail('d-mcu')">
+      <div class="cn-num">02</div><div class="cn-ico">🧠</div>
+      <div class="cn-name">Microcontroller</div><div class="cn-sub">Arduino / Raspberry Pi</div>
+      <div class="cn-hint">▼ tap</div>
+    </div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-node cn-amber" onclick="openDetail('d-gpio')">
+      <div class="cn-num">03</div><div class="cn-ico">⚡</div>
+      <div class="cn-name">GPIO Pin</div><div class="cn-sub">Sends 0V or 5V</div>
+      <div class="cn-hint">▼ tap</div>
+    </div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-node cn-purple" onclick="openDetail('d-device')">
+      <div class="cn-num">04</div><div class="cn-ico">🔌</div>
+      <div class="cn-name">Physical Device</div><div class="cn-sub">LED, motor, servo…</div>
+      <div class="cn-hint">▼ tap</div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="d-code">
+    <div class="dp-head"><div class="dp-ico">💻</div><div><div class="dp-title">Your Code — Arduino IDE</div><div class="dp-sub">Step 01 · Where everything starts</div></div><button class="dp-close" onclick="closeDetail('d-code')">✕</button></div>
+    <div class="dp-body">
+      <p>Arduino IDE is a free app you install on your laptop. You type instructions in a language close to plain English. Your first real program — blinking an LED — has just two meaningful lines: <strong>turn pin 13 ON</strong>, wait, <strong>turn pin 13 OFF</strong>, wait.</p>
+      <p>There's no exam before you start. Open the software, type, click Upload. The Arduino IDE converts your words to electrical instructions and sends them via USB cable to the board in seconds.</p>
+      <div class="dp-note" style="background:rgba(59,130,246,0.06);color:rgba(147,197,253,0.9)">💡 For Data Science: Python is the equivalent — instead of controlling hardware, Python controls data. The thinking is identical: write instructions → machine executes them → you see the result.</div>
+      <div class="dp-tags"><span class="dp-tag">Free · arduino.cc</span><span class="dp-tag">Works offline</span><span class="dp-tag">Built-in examples</span></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="d-mcu">
+    <div class="dp-head"><div class="dp-ico">🧠</div><div><div class="dp-title">Microcontroller — the chip brain</div><div class="dp-sub">CPU + Flash + RAM + GPIO all on one tiny chip</div></div><button class="dp-close" onclick="closeDetail('d-mcu')">✕</button></div>
+    <div class="dp-body">
+      <p>A microcontroller is a <strong>complete computer on a single chip</strong> — CPU, Flash memory (stores your code), and RAM (working memory) all smaller than your thumbnail. Its only job: read your code and control its pins.</p>
+      <p>When you upload from Arduino IDE, your code burns into Flash memory. Plug in a 9V battery and it runs your code forever — no laptop, no USB needed.</p>
+      <div class="dp-note" style="background:rgba(0,245,212,0.06);color:rgba(94,234,212,0.9)">🚀 VLSI engineers design chips exactly like this — but with billions of transistors instead of thousands. When you program an Arduino, you already think like a chip designer.</div>
+      <div class="dp-tags"><span class="dp-tag">CPU inside</span><span class="dp-tag">Flash memory</span><span class="dp-tag">14 GPIO pins</span><span class="dp-tag">Runs standalone</span></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="d-gpio">
+    <div class="dp-head"><div class="dp-ico">⚡</div><div><div class="dp-title">GPIO Pin — code becomes electricity</div><div class="dp-sub">General Purpose Input / Output</div></div><button class="dp-close" onclick="closeDetail('d-gpio')">✕</button></div>
+    <div class="dp-body">
+      <p>GPIO stands for <strong>General Purpose Input / Output</strong>. These are the metal pins on the Arduino. Each pin has two states: <strong>HIGH (5V)</strong> or <strong>LOW (0V)</strong>. Your code decides which state.</p>
+      <p>Pins also work as inputs — connect a sensor or button, and the pin detects whether electricity is arriving. This is how your code reads the real world: every sensor is just electricity changing between 0 and 5V.</p>
+      <div class="dp-note" style="background:rgba(245,158,11,0.06);color:rgba(253,230,138,0.9)">⚡ This is VLSI in miniature — billions of transistors on a chip doing exactly this: switching between 0 and 1, 0V and 5V. Understand GPIO and you understand the core idea of every chip ever made.</div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="d-device">
+    <div class="dp-head"><div class="dp-ico">🔌</div><div><div class="dp-title">Physical Device — the real world reacts</div><div class="dp-sub">Step 04 · The "aha" moment</div></div><button class="dp-close" onclick="closeDetail('d-device')">✕</button></div>
+    <div class="dp-body">
+      <p>Electricity flowing from a GPIO pin can power any low-voltage device — LED, buzzer, servo motor, DC motor. Connect a sensor the other way and your code reads temperature, distance, heartbeat, or light levels.</p>
+      <p>Medical tech engineers use exactly this principle — biosensors convert physical signals (heartbeat, blood oxygen) to electrical signals that a microcontroller reads, just like your button or temperature sensor.</p>
+      <div class="dp-note" style="background:rgba(124,58,237,0.06);color:rgba(196,181,253,0.9)">🤖 ISRO uses this loop — sensors read satellite temperature/voltage, microcontrollers process it, outputs control thrusters. Your Arduino LED is the same loop, just smaller.</div>
+      <div class="dp-tags"><span class="dp-tag">LED / buzzer</span><span class="dp-tag">Servo motor</span><span class="dp-tag">Biosensor</span><span class="dp-tag">Distance sensor</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WHAT YOU NEED ══ -->
+<div class="chain-section">
+  <div class="sec-label">What you need — 3 things only</div>
+  <div class="three-grid">
+    <div class="chain-node cn-teal" onclick="openDetail('d-hw')" style="cursor:pointer">
+      <div class="cn-ico">🔧</div><div class="cn-name">Hardware Kit</div>
+      <div class="cn-sub">Arduino Uno starter kit · ~₹600–900</div><div class="cn-hint">▼ tap</div>
+    </div>
+    <div class="chain-node cn-blue" onclick="openDetail('d-sw')" style="cursor:pointer">
+      <div class="cn-ico">💾</div><div class="cn-name">Software (Free)</div>
+      <div class="cn-sub">Arduino IDE · arduino.cc</div><div class="cn-hint">▼ tap</div>
+    </div>
+    <div class="chain-node cn-amber" onclick="openDetail('d-usb')" style="cursor:pointer">
+      <div class="cn-ico">🔗</div><div class="cn-name">USB Cable</div>
+      <div class="cn-sub">Sends code + power</div><div class="cn-hint">▼ tap</div>
+    </div>
+  </div>
+  <div class="detail-panel" id="d-hw">
+    <div class="dp-head"><div class="dp-ico">🔧</div><div><div class="dp-title">Arduino Uno Starter Kit</div><div class="dp-sub">₹600–900 · No soldering needed</div></div><button class="dp-close" onclick="closeDetail('d-hw')">✕</button></div>
+    <div class="dp-body">
+      <p>Contains everything: <strong>Arduino Uno board</strong>, <strong>breadboard</strong> (plug components without soldering), <strong>jumper wires</strong>, <strong>LEDs</strong>, <strong>resistors</strong>, and USB cable. Good for 10+ beginner projects.</p>
+      <p>Available on Amazon India, Robu.in, or any local electronics shop. Search "Arduino Uno starter kit".</p>
+      <div class="dp-note" style="background:rgba(0,245,212,0.06);color:rgba(94,234,212,0.9)">🛒 Robu.in is India's best Arduino store — ships everywhere, good prices, and stocks components for all future projects too.</div>
+    </div>
+  </div>
+  <div class="detail-panel" id="d-sw">
+    <div class="dp-head"><div class="dp-ico">💾</div><div><div class="dp-title">Arduino IDE — Free Forever</div><div class="dp-sub">Works on any laptop · No internet after install</div></div><button class="dp-close" onclick="closeDetail('d-sw')">✕</button></div>
+    <div class="dp-body">
+      <p>Download from <strong>arduino.cc/en/software</strong>. Install once, use forever offline. Built-in examples: File → Examples → Basics → Blink gives you a working program instantly.</p>
+      <p>The interface is simple: write code area, Verify button (checks mistakes), Upload button (sends to board). Three buttons is all you need to start.</p>
+    </div>
+  </div>
+  <div class="detail-panel" id="d-usb">
+    <div class="dp-head"><div class="dp-ico">🔗</div><div><div class="dp-title">USB Cable — Two Jobs At Once</div><div class="dp-sub">Power + code transfer</div></div><button class="dp-close" onclick="closeDetail('d-usb')">✕</button></div>
+    <div class="dp-body">
+      <p>The USB cable powers the Arduino from your laptop AND sends your uploaded code to the board's Flash memory. Arduino Uno uses USB Type-B (square connector). Usually included in starter kits.</p>
+      <div class="dp-note" style="background:rgba(245,158,11,0.06);color:rgba(253,230,138,0.9)">🔋 After uploading, disconnect USB and use a 9V battery + clip (₹30). Your Arduino runs standalone — your first portable gadget!</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 3 PROJECTS ══ -->
+<div class="chain-section">
+  <div class="sec-label">3 projects — from easy to wow</div>
+  <div class="proj-stack">
+    <div class="proj-row cn-teal" onclick="openDetail('d-p1')">
+      <div style="font-size:24px">💡</div>
+      <div style="flex:1"><div class="cn-num" style="margin-bottom:3px">PROJECT 1 · WEEK 1</div><div class="cn-name">Blink an LED</div><div class="cn-sub">Code sends ON/OFF signal</div></div>
+      <div class="cn-hint" style="margin-top:0;white-space:nowrap">▼ tap</div>
+    </div>
+    <div class="proj-row cn-purple" onclick="openDetail('d-p2')">
+      <div style="font-size:24px">⚙️</div>
+      <div style="flex:1"><div class="cn-num" style="margin-bottom:3px">PROJECT 2 · WEEK 3</div><div class="cn-name">Servo Motor Turns</div><div class="cn-sub">Code controls angle 0–180°</div></div>
+      <div class="cn-hint" style="margin-top:0;white-space:nowrap">▼ tap</div>
+    </div>
+    <div class="proj-row cn-pink" onclick="openDetail('d-p3')">
+      <div style="font-size:24px">🤖</div>
+      <div style="flex:1"><div class="cn-num" style="margin-bottom:3px">PROJECT 3 · MONTH 2</div><div class="cn-name">Sensor Triggers Motor</div><div class="cn-sub">Real world talks back!</div></div>
+      <div class="cn-hint" style="margin-top:0;white-space:nowrap">▼ tap</div>
+    </div>
+  </div>
+  <div class="detail-panel" id="d-p1">
+    <div class="dp-head"><div class="dp-ico">💡</div><div><div class="dp-title">Project 1 — Blink an LED</div><div class="dp-sub">10 minutes · Zero prior knowledge</div></div><button class="dp-close" onclick="closeDetail('d-p1')">✕</button></div>
+    <div class="dp-body">
+      <p>Connect an LED to pin 13. Upload the blink example. The LED blinks at whatever interval you set. Two lines of logic: <strong>digitalWrite(13, HIGH)</strong> → on, <strong>delay(1000)</strong> → wait 1s, <strong>digitalWrite(13, LOW)</strong> → off. Repeat.</p>
+      <p>Change 1000 to 100 — it blinks 10× faster. That moment of control is the hook that creates engineers.</p>
+      <div class="dp-note" style="background:rgba(0,245,212,0.06);color:rgba(94,234,212,0.9)">✨ Data Science parallel: This is the same as running your first Python script and seeing output print in the terminal. Same "I made the computer do something" moment.</div>
+    </div>
+  </div>
+  <div class="detail-panel" id="d-p2">
+    <div class="dp-head"><div class="dp-ico">⚙️</div><div><div class="dp-title">Project 2 — Servo Motor Turns</div><div class="dp-sub">Numbers in code = physical position</div></div><button class="dp-close" onclick="closeDetail('d-p2')">✕</button></div>
+    <div class="dp-body">
+      <p><strong>myServo.write(90)</strong> → motor arm moves exactly to 90°. <strong>myServo.write(0)</strong> → snaps to 0°. Write a loop from 0 to 180 — the servo sweeps back and forth like a radar scanner.</p>
+      <p>This is the same mechanism: RC car steering, robot arm joints, satellite dish positioning, ISRO rover wheel control, and surgical robot arm movement.</p>
+      <div class="dp-note" style="background:rgba(124,58,237,0.06);color:rgba(196,181,253,0.9)">🛰️ Chandrayaan rover joints use servo-style motors. Your Week 3 project and a moon rover share the same core principle.</div>
+    </div>
+  </div>
+  <div class="detail-panel" id="d-p3">
+    <div class="dp-head"><div class="dp-ico">🤖</div><div><div class="dp-title">Project 3 — Sensor Triggers Motor</div><div class="dp-sub">Complete Input → Process → Output loop</div></div><button class="dp-close" onclick="closeDetail('d-p3')">✕</button></div>
+    <div class="dp-body">
+      <p>Ultrasonic sensor reads distance → code decides → motor responds. <strong>If distance &lt; 10cm → spin fast. If distance &gt; 30cm → stop.</strong> You've built an autonomous obstacle-avoidance system.</p>
+      <p>By this point you've naturally learned variables, if-else, loops, and sensor reading — because you needed them, not because a textbook told you to.</p>
+      <div class="dp-note" style="background:rgba(236,72,153,0.06);color:rgba(249,168,212,0.9)">📊 Data science version: Sensor = raw data. Code = model. Motor = decision/output. It's the exact same Input→Process→Output architecture as a machine learning pipeline.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WHY ARDUINO ══ -->
+<div class="sec-label" style="margin-bottom:20px">Why Arduino for Class 8</div>
+<div class="why-grid">
+  <div class="why-card"><div class="wc-label">Designed for beginners</div><p>First project takes <strong>10 minutes and zero prior knowledge</strong>. Satisfaction is immediate. That's the hook.</p></div>
+  <div class="why-card"><div class="wc-label">Questions drive learning</div><p><strong>"Can I blink faster? Control two LEDs? Blink when I clap?"</strong> — each question leads to the next concept.</p></div>
+  <div class="why-card"><div class="wc-label">Physical → logic progression</div><p>Light → button → sensor. By that point, <strong>loops and logic feel like tools</strong> the student chose, not homework.</p></div>
+  <div class="why-card"><div class="wc-label">Connects to all 6 careers</div><p>GPIO→VLSI. Sensor→Space Research telemetry. Motor→Robotics. Statistics→Data Science. Biosensor→Medical. <strong>One kit, six futures.</strong></p></div>
+</div>
+
+<!-- ══ COST BANNER ══ -->
+<div class="cost-banner">
+  <div class="cost-ico">🛒</div>
+  <div class="cost-text"><strong>Total cost to start: ₹600–900.</strong> One Arduino Uno starter kit from Amazon or Robu.in contains everything — board, wires, breadboard, LEDs, resistors, USB cable. <strong>No soldering.</strong> From this one kit: blink LED → control motor → read sensor → build a robot. Six career paths start here.</div>
+</div>
+
+<!-- ══ PROGRESSION ══ -->
+<div class="sec-label" style="margin-bottom:20px">Natural learning progression</div>
+<div class="prog-steps">
+  <div class="prog-step"><div class="prog-dot pd1">1</div><div class="prog-content"><strong>Control a light — pure physical satisfaction</strong><span>LED blinks. Curiosity spikes. "What else can I control?" — this is the moment curiosity becomes engineering.</span></div></div>
+  <div class="prog-step"><div class="prog-dot pd2">2</div><div class="prog-content"><strong>Add a button — they discover "input"</strong><span>Code can listen, not just speak. If-else logic feels natural. Data scientists call this "reading an input feature".</span></div></div>
+  <div class="prog-step"><div class="prog-dot pd3">3</div><div class="prog-content"><strong>Connect a sensor — "the world talks to my code"</strong><span>Loops, variables, conditions feel like tools the student chose to pick up — because they had a problem worth solving.</span></div></div>
+</div>
+
+<!-- ══ ACADEMIC PATH ══ -->
+<div class="academic-section">
+  <div class="sec-label">Academic path — what to study & when</div>
+  <div class="acad-intro">Every topic below is clickable — tap it to see a real-world example of exactly where that concept is used in Space Research, VLSI, Robotics, Satellite, Data Science, or Medical engineering.</div>
+
+  <div class="acad-stages">
+
+    <!-- CLASS 8–10 -->
+    <div class="acad-stage">
+      <div class="acad-stage-head">
+        <span class="stage-badge badge-now">Now</span>
+        <span class="stage-title">Class 8 – 10 · Build the foundation</span>
+      </div>
+
+      <!-- MATHS -->
+      <div class="acad-subject s-math">
+        <div class="subj-head"><span class="subj-icon">📐</span><span class="subj-name">Mathematics</span><span class="subj-imp">Critical for all 6 careers</span></div>
+        <div class="subj-hint">Click any topic to see where it's used in real engineering ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">Algebra
+            <div class="topic-detail"><div class="td-what">Using symbols (x, y) to represent unknowns and solve equations.</div><div class="td-example"><span class="td-label">Real example</span>In Arduino: <code>int speed = distance * 2;</code> — "speed" is your unknown x, calculated from a formula. Every variable in every program is algebra. VLSI engineers use algebra to calculate how much voltage a transistor gate needs. Data scientists use it to define cost functions in ML models. Medical engineers use it to calculate drug dosage from body weight.</div><div class="td-career"><span class="sct sct-vlsi">VLSI</span><span class="sct sct-robot">Robotics</span><span class="sct sct-isro">Space Research</span><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Geometry
+            <div class="topic-detail"><div class="td-what">Shapes, angles, areas, and spatial relationships.</div><div class="td-example"><span class="td-label">Real example</span>A robot arm uses geometry to calculate where its hand is in 3D space — this is called "forward kinematics". VLSI chip layouts are geometric — millions of microscopic rectangles (transistors) placed with nanometre-level spacing. Wrong geometry = the chip doesn't work. Medical imaging (MRI, CT scan) reconstructs 3D geometry of your organs from 2D slices.</div><div class="td-career"><span class="sct sct-robot">Robotics</span><span class="sct sct-vlsi">VLSI</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Trigonometry
+            <div class="topic-detail"><div class="td-what">sin, cos, tan — relationships between angles and sides of triangles.</div><div class="td-example"><span class="td-label">Real example</span>A satellite dish must point at the exact angle in the sky where the satellite is. Engineers use sin and cos to calculate that angle from the satellite's known orbital position. Ultrasonic sensors on robots: the sound bounces at an angle — trig calculates the actual distance. Data science: sin/cos appear in Fourier transforms used to analyse time-series data (heartbeat signals, stock prices, satellite telemetry).</div><div class="td-career"><span class="sct sct-sat">Satellite</span><span class="sct sct-robot">Robotics</span><span class="sct sct-isro">Space Research</span><span class="sct sct-data">Data Science</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Basic Statistics
+            <div class="topic-detail"><div class="td-what">Mean, median, mode, probability — making sense of large amounts of data.</div><div class="td-example"><span class="td-label">Real example</span>Space Research temperature sensors on a satellite send thousands of readings per second. Engineers take the mean to filter out electrical noise and find the true temperature. In VLSI, statistics predicts how many chips per 1000 wafers will have defects — "yield analysis" directly affects company profit. In Data Science and Medical, statistics is the entire foundation — every ML model, every clinical trial, every AI diagnosis is built on statistics.</div><div class="td-career"><span class="sct sct-isro">Space Research</span><span class="sct sct-vlsi">VLSI</span><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Number Systems
+            <div class="topic-detail"><div class="td-what">Decimal (0–9), Binary (0–1), Hexadecimal (0–F) — different ways to write the same number.</div><div class="td-example"><span class="td-label">Real example</span>Your Arduino GPIO pin has exactly two states: 0 (LOW, 0V) and 1 (HIGH, 5V). That IS binary. Every chip ever made speaks binary natively. Chip memory addresses are in hexadecimal — <code>0xFF</code> means 255 in decimal. Data Science: images are stored as binary pixel arrays (0–255 per channel). Understanding number systems means understanding the native language of all hardware and all data.</div><div class="td-career"><span class="sct sct-vlsi">VLSI</span><span class="sct sct-robot">Robotics</span><span class="sct sct-sat">Satellite</span><span class="sct sct-data">Data Science</span></div></div>
+          </div>
+        </div>
+        <div class="subj-career-tags"><span class="sct sct-isro">Space Research</span><span class="sct sct-vlsi">VLSI</span><span class="sct sct-robot">Robotics</span><span class="sct sct-sat">Satellite</span><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span></div>
+      </div>
+
+      <!-- PHYSICS -->
+      <div class="acad-subject s-physics">
+        <div class="subj-head"><span class="subj-icon">⚡</span><span class="subj-name">Physics</span><span class="subj-imp">Critical</span></div>
+        <div class="subj-hint">Click any topic to see the real engineering connection ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">Motion & Forces
+            <div class="topic-detail"><div class="td-what">Newton's laws — force, mass, acceleration (F = ma).</div><div class="td-example"><span class="td-label">Real example</span>PSLV rocket launch: exhaust gases push down (Newton's 3rd law) → rocket pushes up. ISRO engineers calculate exactly how much thrust (force) the engines need to lift the rocket's mass. Your Arduino servo motor: torque (rotational force) determines how heavy a load it can lift. Robot arm design: every joint force must be calculated before building — F = ma applied to each link.</div><div class="td-career"><span class="sct sct-isro">Space Research</span><span class="sct sct-robot">Robotics</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Electricity & Magnetism
+            <div class="topic-detail"><div class="td-what">Voltage, current, resistance — Ohm's Law: V = IR.</div><div class="td-example"><span class="td-label">Real example</span>When you connect an LED to Arduino pin 13, you MUST add a resistor. Why? V = IR. Pin gives 5V, LED needs 2V. Without resistor R, current I becomes dangerously high and burns the LED instantly. Every circuit — from your breadboard to a billion-transistor chip — is applied Ohm's law. Medical devices: biosensors measure tiny electrical signals from your heart (ECG = Electrocardiogram), which are voltages in millivolts.</div><div class="td-career"><span class="sct sct-vlsi">VLSI</span><span class="sct sct-robot">Robotics</span><span class="sct sct-isro">Space Research</span><span class="sct sct-sat">Satellite</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Light & Optics
+            <div class="topic-detail"><div class="td-what">How light reflects, refracts, and travels through materials.</div><div class="td-example"><span class="td-label">Real example</span>Chandrayaan used laser rangefinders to map the lunar surface — laser bounces off, time × speed of light ÷ 2 = distance. VLSI chips are manufactured using photolithography — laser light draws circuit patterns on silicon at nanometre scale. No optics = no chips. Medical: optical fibres carry light inside endoscopes to image inside the body without surgery. MRI uses radio waves + magnets; CT uses X-rays (another form of light).</div><div class="td-career"><span class="sct sct-isro">Space Research</span><span class="sct sct-vlsi">VLSI</span><span class="sct sct-sat">Satellite</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Waves & Sound
+            <div class="topic-detail"><div class="td-what">Frequency, wavelength, amplitude — how waves travel and carry information.</div><div class="td-example"><span class="td-label">Real example</span>Your Arduino ultrasonic sensor sends sound at 40,000 Hz (too high to hear), it bounces off an object, returns. Distance = (speed of sound × time) ÷ 2 — waves applied directly in robotics. Satellite communication uses radio waves (same physics, electromagnetic instead of sound). Medical: ultrasound imaging (baby scans, organ scans) uses exactly this principle — sound bounces off tissues and creates an image from the echo timing.</div><div class="td-career"><span class="sct sct-robot">Robotics</span><span class="sct sct-sat">Satellite</span><span class="sct sct-isro">Space Research</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Basic Electronics
+            <div class="topic-detail"><div class="td-what">Resistors, capacitors, diodes, transistors — basic electronic components.</div><div class="td-example"><span class="td-label">Real example</span>The LED on your breadboard IS a diode — it lets current flow in only one direction. A transistor is a switch that turns on/off based on a control signal — this is the exact component that VLSI packs by the billions onto a chip. Understanding these components on a breadboard with your hands is the best preparation for VLSI design in college.</div><div class="td-career"><span class="sct sct-vlsi">VLSI</span><span class="sct sct-robot">Robotics</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+        </div>
+        <div class="subj-career-tags"><span class="sct sct-isro">Space Research</span><span class="sct sct-vlsi">VLSI</span><span class="sct sct-robot">Robotics</span><span class="sct sct-sat">Satellite</span><span class="sct sct-med">Medical</span></div>
+      </div>
+
+      <!-- CS -->
+      <div class="acad-subject s-cs">
+        <div class="subj-head"><span class="subj-icon">💻</span><span class="subj-name">Computer Science / IT</span><span class="subj-imp">Important</span></div>
+        <div class="subj-hint">Click any topic ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">Programming Logic
+            <div class="topic-detail"><div class="td-what">Variables, conditions (if/else), loops, functions — core building blocks of all code.</div><div class="td-example"><span class="td-label">Real example</span><code>if (distance &lt; 10) { motor.stop(); }</code> — this is programming logic controlling a real motor. Same logic in Data Science: <code>if (probability &gt; 0.5) { classify as "cancer"; }</code>. Medical AI uses the same if-else logic but applied to patient data instead of sensor readings. The thinking pattern is identical — the domain is different.</div><div class="td-career"><span class="sct sct-robot">Robotics</span><span class="sct sct-vlsi">VLSI</span><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Binary & Boolean Logic
+            <div class="topic-detail"><div class="td-what">AND, OR, NOT — operations on 0s and 1s. The language chips think in.</div><div class="td-example"><span class="td-label">Real example</span>An AND gate in a VLSI chip: output is 1 only if BOTH inputs are 1. Billions of these gates form a CPU. Arduino: <code>if (buttonA && buttonB)</code> is a hardware AND gate expressed in code. Data Science: Boolean filters — <code>age > 18 AND city == "Mumbai"</code> — select rows from a dataset. Same AND/OR logic from your Class 8 CS chapter.</div><div class="td-career"><span class="sct sct-vlsi">VLSI</span><span class="sct sct-robot">Robotics</span><span class="sct sct-data">Data Science</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Python Basics (self-study)
+            <div class="topic-detail"><div class="td-what">Python — the most used programming language in Data Science, AI, and robotics.</div><div class="td-example"><span class="td-label">Real example</span>Space Research agencies like ISRO use Python to process satellite imagery. Robotics engineers use Python with ROS (Robot Operating System) for navigation code. Data scientists use Python (Pandas, NumPy, scikit-learn) for every ML project. Medical AI models are built in Python (TensorFlow, PyTorch). Start Python in Class 8 from python.org free tutorials — you'll be 4 years ahead of peers who start in college.</div><div class="td-career"><span class="sct sct-isro">Space Research</span><span class="sct sct-robot">Robotics</span><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+        </div>
+        <div class="subj-career-tags"><span class="sct sct-vlsi">VLSI</span><span class="sct sct-robot">Robotics</span><span class="sct sct-data">Data Science</span></div>
+      </div>
+
+      <!-- BIOLOGY (NEW — for Medical) -->
+      <div class="acad-subject s-bio">
+        <div class="subj-head"><span class="subj-icon">🧬</span><span class="subj-name">Biology</span><span class="subj-imp">Essential for Medical path</span></div>
+        <div class="subj-hint">Click any topic ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">Human Body Systems
+            <div class="topic-detail"><div class="td-what">How the heart, lungs, brain, and organs function together.</div><div class="td-example"><span class="td-label">Real example</span>A cardiac monitor (ECG machine in hospitals) measures the electrical pulses your heart generates with each beat. A biomedical engineer designed that device — but they needed to understand exactly how heart muscles generate electrical signals first. If you don't know the biology, you can't build the sensor. The Arduino heart-rate sensor in your kit detects blood volume changes from the same biology chapter.</div><div class="td-career"><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Cells & Genetics
+            <div class="topic-detail"><div class="td-what">Cell structure, DNA, how genetic information is stored and expressed.</div><div class="td-example"><span class="td-label">Real example</span>DNA sequencing machines (used in hospitals and research) are electronic devices that read genetic code and output digital data. Data scientists analyse that genetic data to predict disease risk. The crossover between Biology + Data Science + Electronics is called Bioinformatics — one of the fastest-growing fields in the world, and India needs thousands of professionals in it.</div><div class="td-career"><span class="sct sct-med">Medical</span><span class="sct sct-data">Data Science</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Nervous System & Brain
+            <div class="topic-detail"><div class="td-what">How neurons send electrical signals — the original "biological computer".</div><div class="td-example"><span class="td-label">Real example</span>Brain-Computer Interfaces (BCI) — like Neuralink — read electrical signals from neurons and translate them to computer commands. EEG machines measure brain electrical activity to diagnose epilepsy. This entire field is Electronics + Biology combined. The neuron's action potential (the electrical signal a brain cell sends) works on the same 0/1 principle as a GPIO pin — it either fires or doesn't.</div><div class="td-career"><span class="sct sct-med">Medical</span><span class="sct sct-data">Data Science</span></div></div>
+          </div>
+        </div>
+        <div class="subj-career-tags"><span class="sct sct-med">Medical Tech</span><span class="sct sct-data">Data Science</span><span class="sct sct-surg">Surgeon</span></div>
+      </div>
+
+      <!-- OUTSIDE CLASS -->
+      <div class="acad-subject s-extra">
+        <div class="subj-head"><span class="subj-icon">🔧</span><span class="subj-name">Outside Class — Do These</span><span class="subj-imp">High Impact</span></div>
+        <div class="subj-hint">Click each to see what skill it builds ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">Arduino Projects
+            <div class="topic-detail"><div class="td-what">Building real circuits and writing code that controls physical things.</div><div class="td-example"><span class="td-label">Real example</span>LED → button → servo → sensor. Each step builds one new mental model. By sensor-triggered motor you've experienced Input→Process→Output — the complete architecture of every system from smartwatch to satellite to hospital monitor. Add a heart-rate sensor to your kit and you've started Medical engineering.</div><div class="td-career"><span class="sct sct-robot">Robotics</span><span class="sct sct-vlsi">VLSI</span><span class="sct sct-isro">Space Research</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Learn Python (free)
+            <div class="topic-detail"><div class="td-what">Python is the language of Data Science, AI, robotics, medical imaging, and ISRO data processing.</div><div class="td-example"><span class="td-label">Real example</span>Start with python.org tutorials → then try Kaggle "Titanic" dataset (free beginner ML project) → then build a simple heart-rate prediction model. Harvard's CS50P course is free on YouTube and the best Python introduction ever made. 4 years of Python practice before college = enormous competitive advantage.</div><div class="td-career"><span class="sct sct-data">Data Science</span><span class="sct sct-robot">Robotics</span><span class="sct sct-isro">Space Research</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Science Olympiad (NSO/IMO)
+            <div class="topic-detail"><div class="td-what">Competitive exams testing Physics, Maths, and Science at application level.</div><div class="td-example"><span class="td-label">Real example</span>NSO and IMO questions go beyond textbook — they test reasoning and application. This is exactly what JEE Advanced and data science interviews test. Students who do olympiads in Class 8–10 find JEE significantly easier. IMO (International Maths Olympiad) preparation directly trains the statistical reasoning needed for Data Science.</div><div class="td-career"><span class="sct sct-isro">Space Research</span><span class="sct sct-vlsi">VLSI</span><span class="sct sct-data">Data Science</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Kaggle (Data Science)
+            <div class="topic-detail"><div class="td-what">Kaggle.com — world's largest data science competition platform. Free datasets, free notebooks, free courses.</div><div class="td-example"><span class="td-label">Real example</span>Kaggle has a free "Intro to Machine Learning" course that takes 4 hours and teaches you to build your first ML model in Python. Medical Kaggle competitions include diagnosing eye disease from images and predicting sepsis in ICU patients. A Class 8 student who completes 3 Kaggle beginner courses stands out completely from peers when applying to college or internships.</div><div class="td-career"><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+        </div>
+        <div class="subj-career-tags"><span class="sct sct-isro">Space Research</span><span class="sct sct-vlsi">VLSI</span><span class="sct sct-robot">Robotics</span><span class="sct sct-sat">Satellite</span><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span></div>
+      </div>
+    </div>
+
+    <!-- CLASS 11–12 -->
+    <div class="acad-stage">
+      <div class="acad-stage-head">
+        <span class="stage-badge badge-next">Next</span>
+        <span class="stage-title">Class 11 – 12 · Science stream — PCM compulsory</span>
+      </div>
+
+      <div class="acad-subject s-physics">
+        <div class="subj-head"><span class="subj-icon">⚡</span><span class="subj-name">Physics (Advanced)</span><span class="subj-imp">Compulsory</span></div>
+        <div class="subj-hint">Click any topic ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">Semiconductor Physics
+            <div class="topic-detail"><div class="td-what">How silicon conducts electricity based on doping.</div><div class="td-example"><span class="td-label">Real example</span>VLSI engineers "dope" silicon — adding boron or phosphorus atoms — to create P-type and N-type regions that form a transistor. Every chip in every device is built from this one principle. This Class 12 Physics chapter IS VLSI at its most fundamental. Medical: pacemakers use semiconductor transistors to regulate heartbeat — your Class 12 physics is inside every patient with a pacemaker.</div><div class="td-career"><span class="sct sct-vlsi">VLSI</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">PN Junction & Diodes
+            <div class="topic-detail"><div class="td-what">P-type + N-type silicon create a junction that allows current in one direction only.</div><div class="td-example"><span class="td-label">Real example</span>The LED on your breadboard IS a PN junction diode — it emits light when forward current passes. Solar panels on satellites use the same PN junction in reverse — light hits it and generates electricity. Every satellite in orbit is powered by PN junctions. Medical: photodiodes in pulse oximeters (the finger clip that measures blood oxygen) are PN junctions detecting light transmitted through your finger.</div><div class="td-career"><span class="sct sct-vlsi">VLSI</span><span class="sct sct-sat">Satellite</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Logic Gates
+            <div class="topic-detail"><div class="td-what">AND, OR, NOT, NAND, NOR — fundamental building blocks of all digital circuits.</div><div class="td-example"><span class="td-label">Real example</span>A modern CPU contains billions of these gates. When your Arduino runs <code>if (a && b)</code>, the chip executes an AND gate physically. VLSI engineers spend their entire career arranging these gates at nanometre scale. Data Science: decision trees (a type of ML model) make decisions using AND/OR logic — the same gates from your Class 12 physics chapter.</div><div class="td-career"><span class="sct sct-vlsi">VLSI</span><span class="sct sct-robot">Robotics</span><span class="sct sct-data">Data Science</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Communication Systems
+            <div class="topic-detail"><div class="td-what">AM/FM modulation, how signals are transmitted wirelessly.</div><div class="td-example"><span class="td-label">Real example</span>Every satellite communicates using modulated radio waves — the same principle as AM/FM radio, just at higher frequency and much longer distance. ISRO's Deep Space Network communicates with probes hundreds of millions of km away using these exact principles. Medical: Bluetooth health wearables (smartwatch, glucose monitor) use wireless communication based on this chapter.</div><div class="td-career"><span class="sct sct-sat">Satellite</span><span class="sct sct-isro">Space Research</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+        </div>
+        <div class="subj-career-tags"><span class="sct sct-vlsi">VLSI</span><span class="sct sct-sat">Satellite</span><span class="sct sct-isro">Space Research</span><span class="sct sct-med">Medical</span></div>
+      </div>
+
+      <div class="acad-subject s-math">
+        <div class="subj-head"><span class="subj-icon">📐</span><span class="subj-name">Mathematics (Advanced)</span><span class="subj-imp">Compulsory</span></div>
+        <div class="subj-hint">Click any topic ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">Calculus
+            <div class="topic-detail"><div class="td-what">Differentiation and integration — rates of change and areas under curves.</div><div class="td-example"><span class="td-label">Real example</span>Orbital mechanics uses calculus to describe how a satellite's velocity changes as it orbits (differentiation of position = velocity). Robot control systems use calculus for PID controllers — these adjust motor power based on the rate of error change (differentiation). Data Science/ML: gradient descent (how every neural network learns) is pure calculus — the algorithm follows the negative slope of a loss function to minimise error.</div><div class="td-career"><span class="sct sct-isro">Space Research</span><span class="sct sct-robot">Robotics</span><span class="sct sct-data">Data Science</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Matrices & Vectors
+            <div class="topic-detail"><div class="td-what">Grids of numbers and directed quantities — the language of transformations.</div><div class="td-example"><span class="td-label">Real example</span>A robot arm's position in 3D space is described by a transformation matrix. Computer vision (how a robot "sees") uses matrix multiplication on pixel arrays. Data Science: every ML model is a matrix operation at its core — a neural network is just a chain of matrix multiplications. Medical imaging: an MRI image is a matrix of intensity values that a radiologist (or AI) reads.</div><div class="td-career"><span class="sct sct-robot">Robotics</span><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Probability & Statistics
+            <div class="topic-detail"><div class="td-what">Chance, distributions, hypothesis testing — the mathematics of uncertainty.</div><div class="td-example"><span class="td-label">Real example</span>Every ML model outputs a probability — "80% chance this X-ray shows pneumonia". That probability comes from Bayes' theorem and probability distributions learned in Class 12. VLSI: defect probability models determine whether a chip design is manufacturable. Medical: clinical trials use hypothesis testing to decide if a drug actually works or if results are due to chance.</div><div class="td-career"><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span><span class="sct sct-vlsi">VLSI</span></div></div>
+          </div>
+        </div>
+        <div class="subj-career-tags"><span class="sct sct-isro">Space Research</span><span class="sct sct-robot">Robotics</span><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span></div>
+      </div>
+
+      <div class="acad-subject s-chem">
+        <div class="subj-head"><span class="subj-icon">🧪</span><span class="subj-name">Chemistry</span><span class="subj-imp">Compulsory</span></div>
+        <div class="subj-hint">Click any topic ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">Solid State Chemistry
+            <div class="topic-detail"><div class="td-what">Conductors, semiconductors, insulators — how atomic structure determines electrical behaviour.</div><div class="td-example"><span class="td-label">Real example</span>Silicon is a semiconductor — not a conductor, not an insulator. By doping it (adding tiny impurities), VLSI engineers control exactly how it conducts. Every chip is made from doped silicon. Medical: drug delivery implants use biocompatible materials designed using solid state chemistry. Understanding why materials behave electrically the way they do is the chemistry foundation of both VLSI and medical devices.</div><div class="td-career"><span class="sct sct-vlsi">VLSI</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Organic Chemistry (Class 12)
+            <div class="topic-detail"><div class="td-what">Carbon-based molecules — the chemistry of life and many materials.</div><div class="td-example"><span class="td-label">Real example</span>Biomaterials for medical implants (hip replacements, stents, contact lenses) are organic polymers. Drug molecules that a Data Scientist or Medical engineer analyses are organic compounds. OLED displays (used in hospital monitors and smartwatches) are organic light-emitting diodes — organic chemistry applied to electronics. This is where Chemistry and Medical tech meet directly.</div><div class="td-career"><span class="sct sct-med">Medical</span><span class="sct sct-vlsi">VLSI</span></div></div>
+          </div>
+        </div>
+        <div class="subj-career-tags"><span class="sct sct-vlsi">VLSI</span><span class="sct sct-isro">Space Research</span><span class="sct sct-med">Medical</span></div>
+      </div>
+
+      <div class="acad-subject s-extra">
+        <div class="subj-head"><span class="subj-icon">🏆</span><span class="subj-name">Competitive Exams to Target</span><span class="subj-imp">Career-defining</span></div>
+        <div class="subj-hint">Click each exam to understand what it unlocks ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">JEE Main & Advanced
+            <div class="topic-detail"><div class="td-what">India's premier engineering entrance — determines IIT/NIT admission.</div><div class="td-example"><span class="td-label">Real example</span>JEE rank determines your college and branch. IIT Bombay/Delhi/Madras ECE or CS are the golden paths to VLSI, Robotics, and Data Science careers. JEE Advanced tests deep application of Physics, Maths, Chemistry — exactly the skills that make a good engineer, not just a test-passer. Start JEE preparation seriously from Class 10.</div><div class="td-career"><span class="sct sct-isro">Space Research</span><span class="sct sct-vlsi">VLSI</span><span class="sct sct-robot">Robotics</span><span class="sct sct-data">Data Science</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">NEET (for Medical path)
+            <div class="topic-detail"><div class="td-what">National Eligibility cum Entrance Test — for MBBS, Biomedical Engineering adjacent paths.</div><div class="td-example"><span class="td-label">Real example</span>For Medical Tech Engineering, you don't need NEET — B.Tech Biomedical Engineering uses JEE. But if you want the combined MBBS + Engineering path (most powerful combination for medical devices), NEET for MBBS + later MS/MCh gives you both the clinical and technical knowledge. Understanding both biology and engineering is rare and extremely valuable in medical devices.</div><div class="td-career"><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">KVPY Scholarship
+            <div class="topic-detail"><div class="td-what">Kishore Vaigyanik Protsahan Yojana — India's top science scholarship for Class 11–12 students.</div><div class="td-example"><span class="td-label">Real example</span>KVPY selects India's best young science talent and gives monthly stipend + direct admission to IISc research programmes. Space Research scientists, IIT professors, and top researchers often have KVPY in their background. Winning KVPY in Class 11 signals to every college and employer that you are serious about science — not just marks.</div><div class="td-career"><span class="sct sct-isro">Space Research</span><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">IIST Entrance (Space Research path)
+            <div class="topic-detail"><div class="td-what">Indian Institute of Space Science & Technology — ISRO's own university with guaranteed placement.</div><div class="td-example"><span class="td-label">Real example</span>IIST in Thiruvananthapuram is the only university in the world that gives its graduates a guaranteed job at ISRO. The entrance exam is separate from JEE (though JEE preparation helps a lot). Graduates work directly on satellite missions, launch vehicles, and space research from day one. If Space Research is your dream, IIST is the most direct path possible.</div><div class="td-career"><span class="sct sct-isro">Space Research</span><span class="sct sct-sat">Satellite</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRADUATION -->
+    <div class="acad-stage">
+      <div class="acad-stage-head">
+        <span class="stage-badge badge-grad">B.Tech</span>
+        <span class="stage-title">Graduation · B.Tech / B.E (4 years) — career-specific branches</span>
+      </div>
+
+      <div class="acad-subject s-path">
+        <div class="subj-head"><span class="subj-icon">⚡</span><span class="subj-name">For VLSI → ECE / EE Branch</span><span class="subj-imp">Specialisation</span></div>
+        <div class="subj-hint">Click topics ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">Verilog / VHDL
+            <div class="topic-detail"><div class="td-what">Hardware Description Languages — you "write" chips in these languages.</div><div class="td-example"><span class="td-label">Real example</span>Just like Arduino code describes what a microcontroller does, Verilog describes what transistors on a chip do — but at a much deeper level. <code>always @(posedge clk) if (enable) out &lt;= in;</code> — this Verilog line describes a flip-flop, a fundamental memory element used billions of times in every CPU. Learning Verilog is what transforms an ECE student into a chip designer.</div><div class="td-career"><span class="sct sct-vlsi">VLSI</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Cadence & Synopsys Tools
+            <div class="topic-detail"><div class="td-what">Professional chip design software used by Intel, Qualcomm, NVIDIA, and every chip company.</div><div class="td-example"><span class="td-label">Real example</span>A VLSI engineer uses Cadence to draw the physical layout of a chip — placing each transistor, connecting them with metal wires at nanometre scale. Synopsys runs timing analysis — checking that every signal arrives at the right time within a clock cycle measured in picoseconds (trillionths of a second). These tools are learned in college; knowing them makes you immediately employable.</div><div class="td-career"><span class="sct sct-vlsi">VLSI</span></div></div>
+          </div>
+        </div>
+        <div class="subj-career-tags"><span class="sct sct-vlsi">VLSI</span></div>
+      </div>
+
+      <div class="acad-subject s-path">
+        <div class="subj-head"><span class="subj-icon">🤖</span><span class="subj-name">For Robotics → Mech / CS / ECE Branch</span><span class="subj-imp">Specialisation</span></div>
+        <div class="subj-hint">Click topics ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">ROS (Robot OS) + Control Systems
+            <div class="topic-detail"><div class="td-what">ROS = Robot Operating System. Control Systems = maths to keep robots stable and accurate.</div><div class="td-example"><span class="td-label">Real example</span>Every modern robot (Boston Dynamics, ISRO rover, surgical robot) runs ROS. It handles sensor reading, motor commands, path planning, and inter-component communication. Control systems: a PID controller keeps a drone stable by constantly measuring tilt and correcting motor power. Your servo motor uses a basic version of this — the closed-loop control loop you started with in your Arduino projects.</div><div class="td-career"><span class="sct sct-robot">Robotics</span><span class="sct sct-isro">Space Research</span></div></div>
+          </div>
+        </div>
+        <div class="subj-career-tags"><span class="sct sct-robot">Robotics</span><span class="sct sct-isro">Space Research</span></div>
+      </div>
+
+      <div class="acad-subject s-path">
+        <div class="subj-head"><span class="subj-icon">📊</span><span class="subj-name">For Data Science → CS / Maths + CS Branch</span><span class="subj-imp">Specialisation</span></div>
+        <div class="subj-hint">Click topics ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">Machine Learning & Deep Learning
+            <div class="topic-detail"><div class="td-what">Algorithms that learn patterns from data without being explicitly programmed.</div><div class="td-example"><span class="td-label">Real example</span>A spam filter that learns to identify spam email is ML. A neural network that detects cancer in a chest X-ray is deep learning. Space Research agencies like ISRO use ML to classify terrain types from satellite imagery. Medical tech: AI models predict patient deterioration in ICUs hours before doctors can detect it manually. The foundation: Python + linear algebra + calculus + statistics — all subjects you're building right now.</div><div class="td-career"><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span><span class="sct sct-isro">Space Research</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">SQL & Big Data
+            <div class="topic-detail"><div class="td-what">SQL queries data from databases. Big Data tools handle terabytes of information.</div><div class="td-example"><span class="td-label">Real example</span><code>SELECT patient_id, diagnosis FROM records WHERE age &gt; 60 AND test_result = 'positive'</code> — this SQL query could identify elderly patients needing follow-up in a hospital database. Every company's data is in a SQL database. Kaggle competitions, real jobs — SQL is the first tool a data scientist uses every single day.</div><div class="td-career"><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span></div></div>
+          </div>
+        </div>
+        <div class="subj-career-tags"><span class="sct sct-data">Data Science</span><span class="sct sct-med">Medical</span></div>
+      </div>
+
+      <div class="acad-subject s-path">
+        <div class="subj-head"><span class="subj-icon">🏥</span><span class="subj-name">For Medical Tech → Biomedical Engg Branch</span><span class="subj-imp">Specialisation</span></div>
+        <div class="subj-hint">Click topics ↓</div>
+        <div class="topic-grid">
+          <div class="topic-pill" onclick="toggleTopic(this)">Biosensors & Medical Devices
+            <div class="topic-detail"><div class="td-what">Sensors that measure biological signals — heartbeat, brain waves, blood glucose, body temperature.</div><div class="td-example"><span class="td-label">Real example</span>A pulse oximeter (the clip on your finger at a hospital) shines two wavelengths of light through your fingertip. Different amounts of light pass through depending on blood oxygen level. The difference in light absorption is detected by a photodiode, processed by a microcontroller, and displayed as your SpO2 reading. You already understand all the components from Arduino: light source, sensor, microcontroller, GPIO pin, output display.</div><div class="td-career"><span class="sct sct-med">Medical</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">Medical Imaging (MRI / CT / Ultrasound)
+            <div class="topic-detail"><div class="td-what">Technologies that create images of the inside of the human body.</div><div class="td-example"><span class="td-label">Real example</span>MRI uses magnets and radio waves — physics you study in Class 12. CT scan uses X-rays from multiple angles and reconstructs 3D images using maths (Fourier transforms — same maths as satellite signal processing). Ultrasound uses the same sound-wave principle as your Arduino ultrasonic sensor but applied to body tissue instead of measuring distance to a wall. All the physics is connected.</div><div class="td-career"><span class="sct sct-med">Medical</span><span class="sct sct-data">Data Science</span></div></div>
+          </div>
+          <div class="topic-pill" onclick="toggleTopic(this)">AI in Healthcare
+            <div class="topic-detail"><div class="td-what">Using machine learning to analyse medical images, predict disease, and personalise treatment.</div><div class="td-example"><span class="td-label">Real example</span>Google's DeepMind AI detects eye disease from retinal scans as accurately as the world's best ophthalmologists. AI models predict sepsis (a deadly infection) in hospital ICUs 6 hours before it becomes critical, saving thousands of lives. This career combines Data Science + Medical — studying both opens this extremely high-impact, high-salary path. India needs thousands of such engineers.</div><div class="td-career"><span class="sct sct-med">Medical</span><span class="sct sct-data">Data Science</span></div></div>
+          </div>
+        </div>
+        <div class="subj-career-tags"><span class="sct sct-med">Medical Tech</span><span class="sct sct-data">Data Science</span><span class="sct sct-surg">Surgeon</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MATRIX -->
+  <div class="matrix-wrap">
+    <div class="matrix-label">Subject → career connection map</div>
+    <table class="matrix">
+      <thead><tr>
+        <th>Subject</th>
+        <th><span class="sct sct-isro">Space Research</span></th>
+        <th><span class="sct sct-vlsi">VLSI</span></th>
+        <th><span class="sct sct-robot">Robotics</span></th>
+        <th><span class="sct sct-sat">Satellite</span></th>
+        <th><span class="sct sct-data">Data Sci</span></th>
+        <th><span class="sct sct-med">Med Tech</span></th>
+        <th><span class="sct sct-surg">Surgeon</span></th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Mathematics</td><td>⬛⬛⬛</td><td>⬛⬛⬛</td><td>⬛⬛⬛</td><td>⬛⬛⬛</td><td>⬛⬛⬛</td><td>⬛⬛◻</td><td>⬛◻◻</td></tr>
+        <tr><td>Physics</td><td>⬛⬛⬛</td><td>⬛⬛⬛</td><td>⬛⬛◻</td><td>⬛⬛⬛</td><td>⬛◻◻</td><td>⬛⬛⬛</td><td>⬛◻◻</td></tr>
+        <tr><td>Chemistry</td><td>⬛◻◻</td><td>⬛⬛◻</td><td>◻◻◻</td><td>⬛◻◻</td><td>◻◻◻</td><td>⬛⬛◻</td><td>⬛⬛◻</td></tr>
+        <tr><td>Biology</td><td>◻◻◻</td><td>◻◻◻</td><td>◻◻◻</td><td>◻◻◻</td><td>⬛◻◻</td><td>⬛⬛⬛</td><td>⬛⬛⬛</td></tr>
+        <tr><td>Computer Science</td><td>⬛⬛◻</td><td>⬛⬛⬛</td><td>⬛⬛⬛</td><td>⬛⬛◻</td><td>⬛⬛⬛</td><td>⬛⬛◻</td><td>◻◻◻</td></tr>
+        <tr><td>Statistics</td><td>⬛⬛◻</td><td>⬛⬛◻</td><td>⬛◻◻</td><td>⬛◻◻</td><td>⬛⬛⬛</td><td>⬛⬛⬛</td><td>⬛⬛◻</td></tr>
+        <tr><td>Electronics (Physics)</td><td>⬛⬛◻</td><td>⬛⬛⬛</td><td>⬛⬛◻</td><td>⬛⬛⬛</td><td>◻◻◻</td><td>⬛⬛◻</td><td>◻◻◻</td></tr>
+        <tr><td>NEET / Medical entrance</td><td>◻◻◻</td><td>◻◻◻</td><td>◻◻◻</td><td>◻◻◻</td><td>◻◻◻</td><td>⬛◻◻</td><td>⬛⬛⬛</td></tr>
+      </tbody>
+    </table>
+    <div class="matrix-legend">⬛⬛⬛ Essential &nbsp;·&nbsp; ⬛⬛◻ Important &nbsp;·&nbsp; ⬛◻◻ Useful &nbsp;·&nbsp; ◻◻◻ Not required</div>
+  </div>
+</div>
+
+<!-- ══ VIDEO REFERENCES ══ -->
+<div class="video-section">
+  <div class="sec-label">Video references — watch & learn</div>
+  <div class="vtabs">
+    <button class="vtab active" onclick="switchTab(this,'tab-begin')">Beginners</button>
+    <button class="vtab" onclick="switchTab(this,'tab-proj')">Projects</button>
+    <button class="vtab" onclick="switchTab(this,'tab-data')">Data Science</button>
+    <button class="vtab" onclick="switchTab(this,'tab-med')">Medical Tech</button>
+    <button class="vtab" onclick="switchTab(this,'tab-career')">Career Inspiration</button>
+    <button class="vtab" onclick="switchTab(this,'tab-india')">Indian Channels</button>
+  </div>
+
+  <div class="vtab-content active" id="tab-begin">
+    <div class="video-grid">
+      <a class="video-card" href="https://www.youtube.com/watch?v=09zfRaLEasY" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#0d1a0d,#001a0a)"><div class="vplay">▶</div><div class="vdur">13:22</div></div>
+        <div class="vinfo"><div class="vtitle">Arduino in 100 Seconds</div><div class="vchannel">Fireship</div><div class="vdesc">Fastest, clearest intro to Arduino. Perfect first video — explains what it is and why it matters in under 2 minutes.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=nL34zDTPkcs" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#0d0d1a,#0a0a2e)"><div class="vplay">▶</div><div class="vdur">28:14</div></div>
+        <div class="vinfo"><div class="vtitle">Arduino Crash Course for Beginners</div><div class="vchannel">Paul McWhorter</div><div class="vdesc">Slow-paced, zero-to-running. Covers IDE setup, first blink, reading pins. Best for Class 8 students.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=BtLwoNJ6klE" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#1a100d,#2e1a0a)"><div class="vplay">▶</div><div class="vdur">11:47</div></div>
+        <div class="vinfo"><div class="vtitle">How Microcontrollers Work</div><div class="vchannel">Branch Education</div><div class="vdesc">Stunning 3D animation of what happens inside a chip when code runs. Mind-blowing for first-time viewers.</div></div>
+      </a>
+      <a class="video-card" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#001a1a,#00282e)"><div class="vplay">▶</div><div class="vdur">Free</div></div>
+        <div class="vinfo"><div class="vtitle">Tinkercad Circuits Simulator</div><div class="vchannel">tinkercad.com · Free</div><div class="vdesc">Simulate Arduino circuits in your browser — no hardware needed to start. Build and test before buying components.</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="vtab-content" id="tab-proj">
+    <div class="video-grid">
+      <a class="video-card" href="https://www.youtube.com/watch?v=d8_xXNcGYgo" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#1a001a,#2e002e)"><div class="vplay">▶</div><div class="vdur">7:55</div></div>
+        <div class="vinfo"><div class="vtitle">Arduino Servo Motor Control</div><div class="vchannel">How To Mechatronics</div><div class="vdesc">Build Project 2 step by step — servo sweeping 0° to 180° with full circuit diagram and code.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=M-UKXCUI0rE" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#001a10,#002e14)"><div class="vplay">▶</div><div class="vdur">12:30</div></div>
+        <div class="vinfo"><div class="vtitle">Obstacle Avoider Robot</div><div class="vchannel">Electronoobs</div><div class="vdesc">Project 3 built — sensor detecting distance and controlling a DC motor. The complete input→output loop.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=xYCMkT9ARFY" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#1a0a00,#2e1200)"><div class="vplay">▶</div><div class="vdur">18:42</div></div>
+        <div class="vinfo"><div class="vtitle">10 Arduino Projects for Beginners</div><div class="vchannel">GreatScott!</div><div class="vdesc">Ten clear ideas from simple LED to temperature sensors — inspiration for what to build next.</div></div>
+      </a>
+      <a class="video-card" href="https://projecthub.arduino.cc" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#001018,#001a2e)"><div class="vplay">▶</div><div class="vdur">500+</div></div>
+        <div class="vinfo"><div class="vtitle">Arduino Project Hub</div><div class="vchannel">projecthub.arduino.cc · Free</div><div class="vdesc">500+ beginner to advanced projects with full code, circuit diagrams, and component lists.</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="vtab-content" id="tab-data">
+    <div class="video-grid">
+      <a class="video-card" href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#1a001a,#2e0028)"><div class="vplay">▶</div><div class="vdur">19:13</div></div>
+        <div class="vinfo"><div class="vtitle">But What Is a Neural Network?</div><div class="vchannel">3Blue1Brown</div><div class="vdesc">The most beautiful explanation of how neural networks learn. Perfect for Class 8 — visual, intuitive, no scary maths.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=ukzFI9rgwfU" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#0a001a,#140030)"><div class="vplay">▶</div><div class="vdur">8:41</div></div>
+        <div class="vinfo"><div class="vtitle">What is Data Science?</div><div class="vchannel">IBM Technology</div><div class="vdesc">Clear, honest explanation of what data scientists actually do day-to-day, with real examples from healthcare and business.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=7eh4d6sabA0" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#001a14,#002820)"><div class="vplay">▶</div><div class="vdur">11:45</div></div>
+        <div class="vinfo"><div class="vtitle">Python for Data Science — Beginner Crash Course</div><div class="vchannel">Programming with Mosh</div><div class="vdesc">Best first Python video — installs Python, shows how to analyse data in under 12 minutes. Class 8 friendly.</div></div>
+      </a>
+      <a class="video-card" href="https://www.kaggle.com/learn" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#1a0014,#2e0022)"><div class="vplay">▶</div><div class="vdur">Free</div></div>
+        <div class="vinfo"><div class="vtitle">Kaggle Free Courses</div><div class="vchannel">kaggle.com/learn · Free</div><div class="vdesc">Intro to ML, Python, Pandas, Data Viz — all free, interactive, browser-based. Best structured learning path for Data Science.</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="vtab-content" id="tab-med">
+    <div class="video-grid">
+      <a class="video-card" href="https://www.youtube.com/watch?v=3OvfGK6Ds1s" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#001a0d,#002814)"><div class="vplay">▶</div><div class="vdur">10:22</div></div>
+        <div class="vinfo"><div class="vtitle">How MRI Machines Work</div><div class="vchannel">Practical Engineering</div><div class="vdesc">Explains MRI using magnets, radio waves, and signal processing — directly connects Physics chapters to life-saving technology.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=rA7SBbKn5hU" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#0d1a10,#0a2014)"><div class="vplay">▶</div><div class="vdur">14:31</div></div>
+        <div class="vinfo"><div class="vtitle">How Surgical Robots Work</div><div class="vchannel">Real Engineering</div><div class="vdesc">Da Vinci surgical robot explained — same servo + sensor + microcontroller principles as your Arduino, scaled to microsurgery.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=2ybLD6_2gKM" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#001018,#001428)"><div class="vplay">▶</div><div class="vdur">9:58</div></div>
+        <div class="vinfo"><div class="vtitle">AI in Medicine — How It Works</div><div class="vchannel">Kurzgesagt</div><div class="vdesc">Animated overview of how AI diagnoses disease from images — connects Data Science to Medical in one brilliant video.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=S5LGQNvqDDE" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#0a1a0a,#0d200d)"><div class="vplay">▶</div><div class="vdur">12:14</div></div>
+        <div class="vinfo"><div class="vtitle">Build a Heart Rate Monitor (Arduino)</div><div class="vchannel">How To Mechatronics</div><div class="vdesc">Attach a pulse sensor to Arduino and display heart rate — first Medical project using the same kit you already own.</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="vtab-content" id="tab-career">
+    <div class="video-grid">
+      <a class="video-card" href="https://www.youtube.com/watch?v=RgUr70WNQWM" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#001018,#001428)"><div class="vplay">▶</div><div class="vdur">16:20</div></div>
+        <div class="vinfo"><div class="vtitle">Space Research: Chandrayaan-3 Mission</div><div class="vchannel">ISRO Official</div><div class="vdesc">See how signal chains, sensors, and microcontrollers work at planetary scale — what your Arduino leads to.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=IcrBqCFLHIY" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#1a001a,#280028)"><div class="vplay">▶</div><div class="vdur">22:48</div></div>
+        <div class="vinfo"><div class="vtitle">How VLSI Chips Are Designed</div><div class="vchannel">Branch Education</div><div class="vdesc">Beautiful animation of transistors, logic gates, and chip design — connects GPIO directly to VLSI careers.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=qv_ramQeQyw" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#00001a,#000028)"><div class="vplay">▶</div><div class="vdur">9:14</div></div>
+        <div class="vinfo"><div class="vtitle">Boston Dynamics Robot — How It Works</div><div class="vchannel">Real Engineering</div><div class="vdesc">Sensors + motors + microcontrollers making a walking robot — your robotics career shown at its most advanced.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/watch?v=5C9uKiMOHCo" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#0d1a10,#102014)"><div class="vplay">▶</div><div class="vdur">7:42</div></div>
+        <div class="vinfo"><div class="vtitle">A Day in the Life of a Data Scientist</div><div class="vchannel">Ken Jee</div><div class="vdesc">Real data scientist shows actual daily work — Python, notebooks, Kaggle, meetings. Honest and relatable.</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="vtab-content" id="tab-india">
+    <div class="video-grid">
+      <a class="video-card" href="https://www.youtube.com/@lastminuteengineers" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#001a14,#002818)"><div class="vplay">▶</div><div class="vdur">Channel</div></div>
+        <div class="vinfo"><div class="vtitle">Last Minute Engineers</div><div class="vchannel">India · lastminuteengineers.com</div><div class="vdesc">Best Indian Arduino resource — each sensor and module gets a dedicated detailed tutorial. Very clear English.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/@techiesms" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#0d1428,#0a1030)"><div class="vplay">▶</div><div class="vdur">Channel</div></div>
+        <div class="vinfo"><div class="vtitle">TechiesSMS</div><div class="vchannel">Hindi + English · India</div><div class="vdesc">Arduino and IoT projects in Hindi/English mix. Very relatable for Indian students — explains with desi examples.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/@codebasics" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#1a001a,#280024)"><div class="vplay">▶</div><div class="vdur">Channel</div></div>
+        <div class="vinfo"><div class="vtitle">Codebasics</div><div class="vchannel">India · Data Science Hindi/English</div><div class="vdesc">Best Indian Data Science YouTube channel — Python, ML, and real Indian job market advice. Hugely popular.</div></div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/@isro_in" target="_blank" rel="noopener">
+        <div class="vthumb" style="background:linear-gradient(135deg,#1a0014,#280020)"><div class="vplay">▶</div><div class="vdur">Channel</div></div>
+        <div class="vinfo"><div class="vtitle">ISRO Official YouTube</div><div class="vchannel">isro.gov.in</div><div class="vdesc">Live rocket launches, mission briefings, behind-the-scenes of India's space programme. Pure career inspiration.</div></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ REFERENCES ══ -->
+<div class="ref-section">
+  <div class="sec-label">References & resources</div>
+  <div class="ref-cats">
+
+    <div class="cat-learn">
+      <div class="cat-label"><span class="cat-dot" style="background:var(--c1)"></span>Learn — official docs & free courses</div>
+      <div class="ref-grid">
+        <a class="ref-card" href="https://www.arduino.cc/en/software" target="_blank"><div class="ref-ico">📦</div><div class="ref-info"><div class="ref-name">Arduino IDE</div><div class="ref-desc">Free software to write & upload code to Arduino boards</div><span class="ref-url">arduino.cc/en/software</span></div><span class="ref-badge">Free</span></a>
+        <a class="ref-card" href="https://docs.arduino.cc/learn/starting-guide/getting-started-arduino/" target="_blank"><div class="ref-ico">📖</div><div class="ref-info"><div class="ref-name">Arduino Getting Started</div><div class="ref-desc">Official step-by-step beginner guide with photos</div><span class="ref-url">docs.arduino.cc</span></div><span class="ref-badge">Official</span></a>
+        <a class="ref-card" href="https://www.tinkercad.com/circuits" target="_blank"><div class="ref-ico">🖥️</div><div class="ref-info"><div class="ref-name">Tinkercad Circuits</div><div class="ref-desc">Simulate Arduino + circuits in browser — no hardware needed</div><span class="ref-url">tinkercad.com/circuits</span></div><span class="ref-badge">Simulator</span></a>
+        <a class="ref-card" href="https://projecthub.arduino.cc/" target="_blank"><div class="ref-ico">🚀</div><div class="ref-info"><div class="ref-name">Arduino Project Hub</div><div class="ref-desc">500+ projects with full code, circuit diagrams, components</div><span class="ref-url">projecthub.arduino.cc</span></div><span class="ref-badge">Projects</span></a>
+      </div>
+    </div>
+
+    <div class="cat-data">
+      <div class="cat-label"><span class="cat-dot" style="background:var(--c4)"></span>Data Science — free learning paths</div>
+      <div class="ref-grid">
+        <a class="ref-card" href="https://www.kaggle.com/learn" target="_blank"><div class="ref-ico">📊</div><div class="ref-info"><div class="ref-name">Kaggle Learn</div><div class="ref-desc">Free Python, ML, Pandas, SQL courses — browser based, no install</div><span class="ref-url">kaggle.com/learn</span></div><span class="ref-badge">Free</span></a>
+        <a class="ref-card" href="https://cs50.harvard.edu/python/" target="_blank"><div class="ref-ico">🎓</div><div class="ref-info"><div class="ref-name">Harvard CS50P (Python)</div><div class="ref-desc">World's best free Python course — by Harvard, on YouTube</div><span class="ref-url">cs50.harvard.edu/python</span></div><span class="ref-badge">Free</span></a>
+        <a class="ref-card" href="https://www.fast.ai" target="_blank"><div class="ref-ico">🤖</div><div class="ref-info"><div class="ref-name">fast.ai — Practical Deep Learning</div><div class="ref-desc">Top-down ML course — build real AI before understanding theory</div><span class="ref-url">fast.ai</span></div><span class="ref-badge">Free</span></a>
+        <a class="ref-card" href="https://numpy.org/learn/" target="_blank"><div class="ref-ico">🔢</div><div class="ref-info"><div class="ref-name">NumPy + Pandas (Official)</div><div class="ref-desc">Free tutorials for the two most important data science libraries</div><span class="ref-url">numpy.org · pandas.pydata.org</span></div><span class="ref-badge">Free</span></a>
+      </div>
+    </div>
+
+    <div class="cat-med">
+      <div class="cat-label"><span class="cat-dot" style="background:var(--c6)"></span>Medical Tech — resources & learning</div>
+      <div class="ref-grid">
+        <a class="ref-card" href="https://www.coursera.org/learn/ai-for-medical-diagnosis" target="_blank"><div class="ref-ico">🏥</div><div class="ref-info"><div class="ref-name">AI for Medical Diagnosis (Coursera)</div><div class="ref-desc">deeplearning.ai course — AI reading X-rays and MRI scans</div><span class="ref-url">coursera.org · AI + Medicine</span></div><span class="ref-badge">Free Audit</span></a>
+        <a class="ref-card" href="https://www.physionet.org" target="_blank"><div class="ref-ico">💓</div><div class="ref-info"><div class="ref-name">PhysioNet — Medical Datasets</div><div class="ref-desc">Real ECG, EEG, ICU patient datasets — free for research and learning</div><span class="ref-url">physionet.org</span></div><span class="ref-badge">Free Data</span></a>
+        <a class="ref-card" href="https://www.instructables.com/Arduino-Heart-Rate-Monitor/" target="_blank"><div class="ref-ico">❤️</div><div class="ref-info"><div class="ref-name">Arduino Heart Rate Monitor</div><div class="ref-desc">Build a medical-grade project with your existing Arduino kit</div><span class="ref-url">instructables.com</span></div><span class="ref-badge">Project</span></a>
+        <a class="ref-card" href="https://www.amtz.in" target="_blank"><div class="ref-ico">🇮🇳</div><div class="ref-info"><div class="ref-name">AMTZ (India Medtech Zone)</div><div class="ref-desc">India's medical device manufacturing hub — Andhra Pradesh</div><span class="ref-url">amtz.in</span></div><span class="ref-badge">India</span></a>
+      </div>
+    </div>
+
+    <div class="cat-buy">
+      <div class="cat-label"><span class="cat-dot" style="background:var(--c3)"></span>Buy in India — trusted electronics shops</div>
+      <div class="ref-grid">
+        <a class="ref-card" href="https://robu.in" target="_blank"><div class="ref-ico">🛒</div><div class="ref-info"><div class="ref-name">Robu.in</div><div class="ref-desc">India's best Arduino & robotics shop — fast shipping, wide stock</div><span class="ref-url">robu.in</span></div><span class="ref-badge">₹ India</span></a>
+        <a class="ref-card" href="https://www.amazon.in/s?k=arduino+uno+starter+kit" target="_blank"><div class="ref-ico">📦</div><div class="ref-info"><div class="ref-name">Amazon India — Starter Kit</div><div class="ref-desc">Search "Arduino Uno starter kit" — kits ₹600–900, Prime delivery</div><span class="ref-url">amazon.in</span></div><span class="ref-badge">₹600–900</span></a>
+        <a class="ref-card" href="https://www.thingbits.in" target="_blank"><div class="ref-ico">🛒</div><div class="ref-info"><div class="ref-name">ThingBits Electronics</div><div class="ref-desc">Bangalore-based — good for south India, quality components</div><span class="ref-url">thingbits.in</span></div><span class="ref-badge">Bengaluru</span></a>
+        <a class="ref-card" href="https://www.electronicscomp.com" target="_blank"><div class="ref-ico">🛒</div><div class="ref-info"><div class="ref-name">ElectronicsComp</div><div class="ref-desc">Wide range of Arduino kits, sensors, biosensors — pan-India</div><span class="ref-url">electronicscomp.com</span></div><span class="ref-badge">₹ India</span></a>
+      </div>
+    </div>
+
+    <div class="cat-comp">
+      <div class="cat-label"><span class="cat-dot" style="background:var(--c2)"></span>Compete & explore — programmes for students</div>
+      <div class="ref-grid">
+        <a class="ref-card" href="https://wro-association.org" target="_blank"><div class="ref-ico">🏆</div><div class="ref-info"><div class="ref-name">World Robot Olympiad (WRO)</div><div class="ref-desc">International robotics competition — India participates, Class 8+ eligible</div><span class="ref-url">wro-association.org</span></div><span class="ref-badge">Competition</span></a>
+        <a class="ref-card" href="https://isro.gov.in/YoungScientistProgramme.html" target="_blank"><div class="ref-ico">🚀</div><div class="ref-info"><div class="ref-name">ISRO YUVIKA Programme</div><div class="ref-desc">Class 9 students visit ISRO centres — apply after Class 8</div><span class="ref-url">isro.gov.in/YUVIKA</span></div><span class="ref-badge">Space Research</span></a>
+        <a class="ref-card" href="https://www.kaggle.com/competitions" target="_blank"><div class="ref-ico">📊</div><div class="ref-info"><div class="ref-name">Kaggle Competitions</div><div class="ref-desc">Compete in Data Science challenges — medical, satellite, any domain</div><span class="ref-url">kaggle.com/competitions</span></div><span class="ref-badge">Online</span></a>
+        <a class="ref-card" href="https://www.sofworld.org" target="_blank"><div class="ref-ico">🏅</div><div class="ref-info"><div class="ref-name">Science Olympiad Foundation</div><div class="ref-desc">NSO, IMO, IEO exams for Class 8 — prepares for JEE thinking</div><span class="ref-url">sofworld.org</span></div><span class="ref-badge">Exam</span></a>
+      </div>
+    </div>
+
+    <div class="cat-india">
+      <div class="cat-label"><span class="cat-dot" style="background:var(--c5)"></span>India-specific — careers & institutions</div>
+      <div class="ref-grid">
+        <a class="ref-card" href="https://www.isro.gov.in" target="_blank"><div class="ref-ico">🛰️</div><div class="ref-info"><div class="ref-name">ISRO Official Website</div><div class="ref-desc">All missions, careers, and the YUVIKA programme for students</div><span class="ref-url">isro.gov.in</span></div><span class="ref-badge">Space Research</span></a>
+        <a class="ref-card" href="https://iist.ac.in" target="_blank"><div class="ref-ico">🎓</div><div class="ref-info"><div class="ref-name">IIST — ISRO's University</div><div class="ref-desc">Only university with guaranteed ISRO placement after graduation</div><span class="ref-url">iist.ac.in</span></div><span class="ref-badge">College</span></a>
+        <a class="ref-card" href="https://www.semiconductor.gov.in" target="_blank"><div class="ref-ico">⚡</div><div class="ref-info"><div class="ref-name">India Semiconductor Mission</div><div class="ref-desc">India's ₹76,000 cr chip programme — why VLSI careers are booming</div><span class="ref-url">semiconductor.gov.in</span></div><span class="ref-badge">VLSI</span></a>
+        <a class="ref-card" href="https://www.nptel.ac.in" target="_blank"><div class="ref-ico">📚</div><div class="ref-info"><div class="ref-name">NPTEL — Free IIT Courses</div><div class="ref-desc">Free courses from IITs on embedded systems, ML, biomedical, VLSI</div><span class="ref-url">nptel.ac.in</span></div><span class="ref-badge">IIT Free</span></a>
+      </div>
+    </div>
+
+  </div>
+  <div class="ref-footnote">All links open in a new tab · Verified March 2026 · All free resources confirmed free</div>
+</div>
+
+</div><!-- end page -->
+
+<script>
+function openDetail(id){
+  const p=document.getElementById(id);
+  if(!p)return;
+  if(p.classList.contains('open')){closeDetail(id);return}
+  const sec=p.closest('.careers-section,.chain-section');
+  if(sec)sec.querySelectorAll('.detail-panel.open').forEach(x=>x.classList.remove('open'));
+  p.classList.add('open');
+  setTimeout(()=>p.scrollIntoView({behavior:'smooth',block:'nearest'}),80);
+}
+function closeDetail(id){
+  const p=document.getElementById(id);
+  if(p)p.classList.remove('open');
+}
+function toggleTopic(el){
+  const wasOpen=el.classList.contains('open');
+  document.querySelectorAll('.topic-pill.open').forEach(x=>{
+    if(x!==el)x.classList.remove('open');
+  });
+  el.classList.toggle('open',!wasOpen);
+  // close on outside click
+  if(!wasOpen){
+    setTimeout(()=>{
+      function outside(e){if(!el.contains(e.target)){el.classList.remove('open');document.removeEventListener('click',outside)}}
+      document.addEventListener('click',outside);
+    },10);
+  }
+}
+function switchTab(btn,tabId){
+  const parent=btn.closest('.video-section');
+  parent.querySelectorAll('.vtab').forEach(b=>b.classList.remove('active'));
+  parent.querySelectorAll('.vtab-content').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  const t=document.getElementById(tabId);
+  if(t)t.classList.add('active');
+}
+</script>
+</body>
+</html>
