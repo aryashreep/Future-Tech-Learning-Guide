@@ -30,20 +30,13 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.7;overflow-x:hidden}
 
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;
-  background-image:
-    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(96,165,250,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(129,140,248,0.06) 0%, transparent 60%),
-    linear-gradient(rgba(96,165,250,0.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(96,165,250,0.03) 1px,transparent 1px);
-  background-size:100% 100%,100% 100%,48px 48px,48px 48px;
+body::before{display:none}
+
+#bg-canvas{
+  position:fixed;inset:0;z-index:0;
+  width:100%;height:100%;
   pointer-events:none;
 }
-
-.neural-deco{position:fixed;z-index:0;pointer-events:none;opacity:0.5}
-.neural-deco span{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--c1);animation:nodePulse 3s ease-in-out infinite}
-@keyframes nodePulse{0%,100%{opacity:0.2;transform:scale(1)}50%{opacity:0.8;transform:scale(1.4)}}
 
 .page{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:64px 24px 120px}
 
@@ -439,14 +432,7 @@ table.matrix tr:hover td:first-child{color:#fff}
 </head>
 <body>
 
-<div class="neural-deco">
-  <span style="top:8%;left:12%;animation-delay:0s"></span>
-  <span style="top:15%;left:85%;animation-delay:0.5s"></span>
-  <span style="top:45%;left:5%;animation-delay:1s"></span>
-  <span style="top:70%;left:92%;animation-delay:1.5s"></span>
-  <span style="top:85%;left:20%;animation-delay:0.8s"></span>
-  <span style="top:30%;left:60%;animation-delay:1.2s"></span>
-</div>
+<canvas id="bg-canvas"></canvas>
 
 <div class="page">
 
@@ -1606,6 +1592,280 @@ function switchTab(btn,tabId){
   const t=document.getElementById(tabId);
   if(t)t.classList.add('active');
 }
+</script>
+
+
+<script>
+(function () {
+  var canvas = document.getElementById('bg-canvas');
+  var ctx    = canvas.getContext('2d');
+  var W, H, CW, LH, frame = 0, figs = [], bgCells = [];
+  var FS = 12;
+
+  /* ── ASCII Art figure definitions ── */
+  var DEFS = [
+    {
+      id: 'ROCKET',
+      color: [96, 165, 250],
+      lines: [
+        "      ^      ",
+        "     /|\\    ",
+        "    / | \\   ",
+        "   /  |  \\  ",
+        "  | * | * |  ",
+        "  |  [=]  |  ",
+        "  |  [=]  |  ",
+        "   \\_____/  ",
+        "     ||||    ",
+        "    /|||||\\  ",
+        "   / ||||| \\ "
+      ]
+    },
+    {
+      id: 'ENGINEER',
+      color: [186, 230, 253],
+      lines: [
+        "    ___    ",
+        "   (   )   ",
+        "    ---    ",
+        "   /|||\\  ",
+        "  / |+| \\  ",
+        "    |||    ",
+        "   /| |\\  ",
+        "  / | | \\  "
+      ]
+    },
+    {
+      id: 'VLSI',
+      color: [129, 140, 248],
+      lines: [
+        "  _____________  ",
+        " |  |  |  |  |  |",
+        "-|             |-",
+        "-|  +-------+  |-",
+        "-|  | VLSI  |  |-",
+        "-|  | [###] |  |-",
+        "-|  | [###] |  |-",
+        "-|  +-------+  |-",
+        "-|             |-",
+        " |__|__|__|__|__|",
+        "  -------------  "
+      ]
+    },
+    {
+      id: 'SATELLITE',
+      color: [56, 189, 248],
+      lines: [
+        " [###]     [###] ",
+        "    \\       /   ",
+        "     \\     /    ",
+        "      \\   /     ",
+        "  +----===----+  ",
+        "  |   (( ))   |  ",
+        "  |    | |    |  ",
+        "  +----===----+  ",
+        "      /   \\     ",
+        "     /     \\    ",
+        "    /       \\   ",
+        " [###]     [###] "
+      ]
+    },
+    {
+      id: 'ROBOT',
+      color: [232, 121, 249],
+      lines: [
+        "   .-------.   ",
+        "  |  o   o  |  ",
+        "  |  .---.  |  ",
+        "  |  |   |  |  ",
+        "   '-'---'-'   ",
+        "  .----------. ",
+        " /|          |\\ ",
+        "  |   [  ]   |  ",
+        "  |   [  ]   |  ",
+        "  '----------'  ",
+        "    ||    ||    ",
+        "   _||_  _||_   "
+      ]
+    },
+    {
+      id: 'SURGEON',
+      color: [52, 211, 153],
+      lines: [
+        "    ___    ",
+        "   (   )   ",
+        "    ---    ",
+        "   \\(+)/   ",
+        "    |||    ",
+        "  __|_|__  ",
+        " /   |   \\ ",
+        "   __|__   ",
+        "   |   |   ",
+        "   |   |   ",
+        "  _|   |_  "
+      ]
+    }
+  ];
+
+  /* ── Background char pool ── */
+  var BGPOOL = '01·∙+×lambda;pi;sum;nabla;infin;equiv;partial;01100101';
+
+  function setup() {
+    ctx.font = FS + "px 'JetBrains Mono','Courier New',monospace";
+    CW = ctx.measureText('M').width;
+    LH = FS + 3;
+  }
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    setup();
+    buildBg();
+    buildFigs();
+  }
+
+  function buildBg() {
+    var pool = '01·∙+×≡≈∂∑∏∇λπφ∞░▒01100101';
+    var cols = Math.ceil(W / 18) + 1;
+    var rows = Math.ceil(H / 18) + 1;
+    bgCells = [];
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        bgCells.push({
+          x:  c * 18,
+          y:  r * 18,
+          ch: pool[Math.floor(Math.random() * pool.length)],
+          op: 0.025 + Math.random() * 0.055,
+          ph: Math.random() * Math.PI * 2
+        });
+      }
+    }
+  }
+
+  function figDims(def) {
+    var mw = 0;
+    for (var i = 0; i < def.lines.length; i++) {
+      if (def.lines[i].length > mw) mw = def.lines[i].length;
+    }
+    return { w: mw * CW, h: def.lines.length * LH };
+  }
+
+  function makeFig(def, scatter) {
+    var d = figDims(def);
+    var x = scatter ? Math.random() * Math.max(1, W - d.w)  : -d.w - 20;
+    var y = scatter ? Math.random() * Math.max(1, H - d.h)  : Math.random() * H;
+    return {
+      def:      def,
+      x:        x,
+      y:        y,
+      baseY:    y,
+      vx:       (Math.random() - 0.5) * 0.18,
+      vy:       (Math.random() - 0.5) * 0.12,
+      bobA:     6  + Math.random() * 10,
+      bobS:     0.006 + Math.random() * 0.009,
+      bobPh:    Math.random() * Math.PI * 2,
+      op:       0.22 + Math.random() * 0.20,
+      glow:     4  + Math.random() * 5,
+      w:        d.w,
+      h:        d.h
+    };
+  }
+
+  function buildFigs() {
+    figs = [];
+    for (var i = 0; i < DEFS.length; i++) {
+      /* 2 instances of each figure, scattered randomly */
+      figs.push(makeFig(DEFS[i], true));
+      figs.push(makeFig(DEFS[i], true));
+    }
+  }
+
+  function drawFig(fig) {
+    var def = fig.def;
+    var bob = Math.sin(frame * fig.bobS + fig.bobPh) * fig.bobA;
+    var px  = fig.x;
+    var py  = fig.baseY + bob;
+    var r   = def.color[0], g = def.color[1], b = def.color[2];
+
+    ctx.font = FS + "px 'JetBrains Mono','Courier New',monospace";
+    ctx.textBaseline = 'top';
+
+    /* glow pass */
+    ctx.shadowColor = "rgba(" + r + "," + g + "," + b + ",0.55)";
+    ctx.shadowBlur  = fig.glow;
+    ctx.fillStyle   = "rgba(" + r + "," + g + "," + b + "," + (fig.op * 0.7).toFixed(3) + ")";
+    for (var li = 0; li < def.lines.length; li++) {
+      ctx.fillText(def.lines[li], px, py + li * LH);
+    }
+
+    /* crisp bright pass */
+    ctx.shadowBlur = 0;
+    ctx.fillStyle  = "rgba(" + r + "," + g + "," + b + "," + fig.op.toFixed(3) + ")";
+    for (var li2 = 0; li2 < def.lines.length; li2++) {
+      ctx.fillText(def.lines[li2], px, py + li2 * LH);
+    }
+
+    /* label tag */
+    ctx.font      = "9px 'JetBrains Mono','Courier New',monospace";
+    ctx.fillStyle = "rgba(" + r + "," + g + "," + b + "," + (fig.op * 0.45).toFixed(3) + ")";
+    ctx.fillText("// " + def.id, px, py + def.lines.length * LH + 4);
+
+    /* drift */
+    fig.x     += fig.vx;
+    fig.baseY += fig.vy;
+
+    /* wrap horizontally */
+    if (fig.vx > 0 && fig.x > W + 40)        { fig.x = -fig.w - 40; fig.baseY = Math.random() * H; }
+    if (fig.vx < 0 && fig.x + fig.w < -40)   { fig.x = W + 40;      fig.baseY = Math.random() * H; }
+
+    /* wrap vertically */
+    if (fig.vy > 0 && fig.baseY > H + 40)     { fig.baseY = -fig.h - 40; }
+    if (fig.vy < 0 && fig.baseY + fig.h < -40){ fig.baseY = H + 40;      }
+  }
+
+  function draw() {
+    frame++;
+
+    /* solid dark bg */
+    ctx.fillStyle = '#020610';
+    ctx.fillRect(0, 0, W, H);
+
+    /* dim background char grid */
+    ctx.font = "11px 'JetBrains Mono','Courier New',monospace";
+    ctx.textBaseline = 'top';
+    var pool2 = '01·∙+×≡≈∂∑∏∇λπφ∞░▒01100101';
+    for (var ci = 0; ci < bgCells.length; ci++) {
+      var cell = bgCells[ci];
+      /* very rare mutation */
+      if (frame % 180 === 0 && Math.random() < 0.015) {
+        cell.ch = pool2[Math.floor(Math.random() * pool2.length)];
+      }
+      var op = cell.op * (0.4 + 0.6 * Math.sin(frame * 0.004 + cell.ph));
+      ctx.fillStyle = "rgba(96,165,250," + op.toFixed(3) + ")";
+      ctx.fillText(cell.ch, cell.x, cell.y);
+    }
+
+    /* draw figures */
+    ctx.shadowBlur = 0;
+    for (var fi = 0; fi < figs.length; fi++) {
+      drawFig(figs[fi]);
+    }
+
+    /* vignette */
+    var vg = ctx.createRadialGradient(W/2, H/2, H * 0.22, W/2, H/2, Math.max(W, H) * 0.88);
+    vg.addColorStop(0,   'rgba(2,6,16,0)');
+    vg.addColorStop(0.55,'rgba(2,6,16,0.12)');
+    vg.addColorStop(1,   'rgba(2,6,16,0.90)');
+    ctx.fillStyle = vg;
+    ctx.fillRect(0, 0, W, H);
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+})();
 </script>
 </body>
 </html>
